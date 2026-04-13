@@ -6,11 +6,11 @@
 /*   By: htavares <htavares@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 15:35:00 by htavares          #+#    #+#             */
-/*   Updated: 2026/04/13 15:54:07 by htavares         ###   ########.fr       */
+/*   Updated: 2026/04/13 16:08:30 by htavares         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/cub3d.h"
+#include "../includes/cub3d.h"
 
 int	main(int ac, char **av)
 {

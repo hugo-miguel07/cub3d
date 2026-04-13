@@ -2,7 +2,10 @@ NAME = cub3d
 CC = cc
 CFLAGS = -Wall -Werror -Wextra -g
 
-SRCS = main.c
+SRCS = srcs/main.c \
+		srcs/execution/exec.c \
+		srcs/parsing/parsing.c \
+
 
 OBJS = $(SRCS:.c=.o)
 
