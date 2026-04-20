@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: htavares <htavares@student.42.fr>          +#+  +:+       +#+        */
+/*   By: antabord <antabord@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 15:35:00 by htavares          #+#    #+#             */
-/*   Updated: 2026/04/13 16:08:30 by htavares         ###   ########.fr       */
+/*   Updated: 2026/04/20 11:31:40 by antabord         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 int	main(int ac, char **av)
 {
 	if (ac != 2)
-		return (1);
-	printf("lets build cub3d :)\n");
+		exit_check(INVALID_NUMBER_ARGS);
+	parsing(av);
 	av = NULL;
 	return (0);
 }
