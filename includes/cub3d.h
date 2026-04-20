@@ -6,7 +6,7 @@
 /*   By: antabord <antabord@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 15:51:07 by htavares          #+#    #+#             */
-/*   Updated: 2026/04/20 14:39:15 by antabord         ###   ########.fr       */
+/*   Updated: 2026/04/20 17:27:04 by antabord         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include <fcntl.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <stdbool.h>
 #include "../libft/libft.h"
 
 #ifndef BUFFER_SIZE
@@ -46,3 +47,4 @@ exit_check(enum exit_code code);
 
 void    parsing(char **av);
 int     checking_cubfile(char *av);
+void    filling_struct_part1(char *tmp, char *id, s_file *file);
