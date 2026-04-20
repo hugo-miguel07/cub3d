@@ -3,22 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antabord <antabord@student.42.fr>          +#+  +:+       +#+        */
+/*   By: htavares <htavares@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 15:51:07 by htavares          #+#    #+#             */
-/*   Updated: 2026/04/20 14:39:15 by antabord         ###   ########.fr       */
+/*   Updated: 2026/04/20 17:44:35 by htavares         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include <fcntl.h>
-#include <stdlib.h>
-#include <stdio.h>
-#include "../libft/libft.h"
+#ifndef CUB3D_H
+# define CUB3D_H
 
-#ifndef BUFFER_SIZE
-#define BUFFER_SIZE 10
-#endif
+# include <unistd.h>
+# include <fcntl.h>
+# include <stdlib.h>
+# include <stdio.h>
+# include "../libft/libft.h"
+# include "../minilibx/mlx.h"
+
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 10
+# endif
+
+/*--------------Parsing Declaration--------------------*/
 
 enum exit_code {
     INVALID_NUMBER_ARGS,
@@ -42,7 +48,44 @@ typedef struct t_file{
 
 exit_check(enum exit_code code);
 
-/*---------------------Parsing-------------------------*/
+/*-------------Execution Declaration-------------------*/
 
-void    parsing(char **av);
-int     checking_cubfile(char *av);
+# ifndef WIN_W
+#  define WIN_W 1280
+# endif
+
+# ifndef WIN_H
+#  define WIN_H 720
+# endif
+
+typedef struct	s_point
+{
+	int		x;
+	int		y;
+	char	orientation;
+}	t_point;
+
+typedef struct	s_game
+{
+	void	*mlx;
+	void	*win;
+	char	**map;
+	int		width;
+	int		height;
+	t_point	player;
+	void	*img_wall;
+	int		win_w;
+	int		win_h;
+}	t_game;
+
+/*----------------Parsing Functions--------------------*/
+
+s_file	*parsing(char **av);
+int		checking_cubfile(char *av);
+
+/*---------------Execution Functions-------------------*/
+
+int		exec(s_file *gamefile);
+t_point	find_player(char **map);
+
+#endif
