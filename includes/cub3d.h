@@ -6,7 +6,7 @@
 /*   By: htavares <htavares@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 15:51:07 by htavares          #+#    #+#             */
-/*   Updated: 2026/04/20 17:44:35 by htavares         ###   ########.fr       */
+/*   Updated: 2026/04/21 16:42:34 by htavares         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,8 @@ exit_check(enum exit_code code);
 
 typedef struct	s_point
 {
-	int		x;
-	int		y;
+	double	x;
+	double	y;
 	char	orientation;
 }	t_point;
 
@@ -70,22 +70,22 @@ typedef struct	s_game
 	void	*mlx;
 	void	*win;
 	char	**map;
-	int		width;
-	int		height;
 	t_point	player;
-	void	*img_wall;
 	int		win_w;
 	int		win_h;
 }	t_game;
 
 /*----------------Parsing Functions--------------------*/
 
-s_file	*parsing(char **av);
+s_file	parsing(char **av);
 int		checking_cubfile(char *av);
 
 /*---------------Execution Functions-------------------*/
 
-int		exec(s_file *gamefile);
+int		exec(s_file gamefile);
 t_point	find_player(char **map);
+int		init_game_variables(t_game *game, s_file file);
+void	cleanup_game(t_game *game);
+void	cleanup_file(s_file gamefile);
 
 #endif

@@ -6,23 +6,21 @@
 /*   By: htavares <htavares@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 15:35:00 by htavares          #+#    #+#             */
-/*   Updated: 2026/04/20 17:02:05 by htavares         ###   ########.fr       */
+/*   Updated: 2026/04/21 17:01:07 by htavares         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "cub3d.h"
 
 int	main(int ac, char **av)
 {
-	s_file	*gamefile;
+	s_file	gamefile;
 	
 	if (ac != 2)
 		exit_check(INVALID_NUMBER_ARGS);
 	gamefile = parsing(av);
 	if (!exec(gamefile))
-	{
-		//free elementos na heap até aqui
-		return (1);
-	}
+		return (cleanup_file(gamefile), 1);
+	cleanup_file(gamefile);
 	return (0);
 }
