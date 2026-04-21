@@ -6,7 +6,7 @@
 /*   By: antabord <antabord@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 08:53:02 by htavares          #+#    #+#             */
-/*   Updated: 2026/04/20 17:55:54 by antabord         ###   ########.fr       */
+/*   Updated: 2026/04/21 11:57:27 by antabord         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ size_t	ft_strlen(const char *s)
 	size_t	size;
 
 	size = 0;
+	if (!s)
+		return 0;
 	while (*s)
 	{
 		s++;

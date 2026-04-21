@@ -6,11 +6,12 @@
 /*   By: antabord <antabord@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/20 13:25:43 by antabord          #+#    #+#             */
-/*   Updated: 2026/04/20 17:50:49 by antabord         ###   ########.fr       */
+/*   Updated: 2026/04/21 15:26:09 by antabord         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
 
 static char *get_line_update_buffer(char *tmp, char *buffer)
 {
@@ -20,9 +21,12 @@ static char *get_line_update_buffer(char *tmp, char *buffer)
         return NULL;
     start = ft_strchr(tmp, '\n');
     if (!start)
+    {
+        buffer[0] = '\0';
         return tmp;
+    }
     *start = '\0';
-    buffer = start;
+    ft_memmove(buffer, start + 1, ft_strlen(start + 1) + 1);
     return tmp;
 }
 
@@ -46,8 +50,10 @@ static void getting_id(char *tmp, s_file *file)
         tmp++;
         filling_struct_part1(tmp, id, file);
     }
+    else if (*tmp && file->fill_counter == 6)
+        filling_struct_part3(tmp, file);
     else
-        exit_check(INVALID_ID);
+        exit_check(INVALID_ID, file);
 }
 
 static char    *reading_file(int fd)
@@ -58,6 +64,7 @@ static char    *reading_file(int fd)
     char *old_tmp;
     char *line;
 
+    tmp = NULL;
     if (buffer[0])
     {
         tmp = ft_strjoin(NULL, buffer);
@@ -68,9 +75,9 @@ static char    *reading_file(int fd)
         buffer[bytes_read] = '\0';
         old_tmp = tmp;
         tmp = ft_strjoin(tmp, buffer);
+        free(old_tmp);
         if (!tmp)
             break;
-        free(old_tmp);
         if (ft_strchr(tmp, '\n'))
             break;
     }
@@ -82,13 +89,11 @@ void    checking_file(int fd, s_file *file)
 {
     char *line;
 
-    while (line = reading_file(fd))
+    while ((line = reading_file(fd)))
     {
         getting_id(line, file);
         free(line);
     }
     close(fd);
-
-    
 }
 

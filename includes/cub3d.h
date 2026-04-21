@@ -6,7 +6,7 @@
 /*   By: antabord <antabord@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 15:51:07 by htavares          #+#    #+#             */
-/*   Updated: 2026/04/20 17:27:04 by antabord         ###   ########.fr       */
+/*   Updated: 2026/04/21 15:31:54 by antabord         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 #endif
 
 enum exit_code {
+    MALLOC_ERR,
     INVALID_NUMBER_ARGS,
     FILE_DOENST_EXIST,
     NO_READING_PERM,
@@ -29,6 +30,10 @@ enum exit_code {
     INVALID_TYPE_FILE,
     EMPTY_FILE,
     INVALID_ID,
+    INVALID_NOTEXTURE_PATH,
+    INVALID_SOTEXTURE_PATH,
+    INVALID_EATEXTURE_PATH,
+    INVALID_WETEXTURE_PATH,
 };
 
 typedef struct t_file{
@@ -39,12 +44,16 @@ typedef struct t_file{
     char **F_color;
     char **C_color;
     char **map;
+    int fill_counter;
 }   s_file;
 
-exit_check(enum exit_code code);
+exit_check(enum exit_code code, s_file *file);  /*tem que aceitar os args daquilo que s tem que libertar*/
+void free_arr(char **arr);
 
 /*---------------------Parsing-------------------------*/
 
-void    parsing(char **av);
+s_file    parsing(s_file *file, char **av);
 int     checking_cubfile(char *av);
 void    filling_struct_part1(char *tmp, char *id, s_file *file);
+void    checking_coordinates(s_file *files);
+void    checking_paths(s_file *file);
