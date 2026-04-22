@@ -6,7 +6,7 @@
 /*   By: antabord <antabord@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 15:51:07 by htavares          #+#    #+#             */
-/*   Updated: 2026/04/21 15:31:54 by antabord         ###   ########.fr       */
+/*   Updated: 2026/04/22 12:56:58 by antabord         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ enum exit_code {
     INVALID_SOTEXTURE_PATH,
     INVALID_EATEXTURE_PATH,
     INVALID_WETEXTURE_PATH,
+    INVALID_COLOR_COORDINATES,
 };
 
 typedef struct t_file{
