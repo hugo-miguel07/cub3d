@@ -6,7 +6,7 @@
 /*   By: antabord <antabord@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/20 13:25:43 by antabord          #+#    #+#             */
-/*   Updated: 2026/04/21 15:26:09 by antabord         ###   ########.fr       */
+/*   Updated: 2026/04/23 14:16:53 by antabord         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,10 @@ static char *get_line_update_buffer(char *tmp, char *buffer)
     return tmp;
 }
 
-static void getting_id(char *tmp, s_file *file)
+static int getting_id(char *tmp, s_file *file)
 {
     char id[3];
 
-    while (*tmp == ' ' || *tmp == '\t')
-        tmp++;
     if (*tmp == 'N' || *tmp == 'S' || *tmp == 'W' || *tmp == 'E' || *tmp == 'F' || *tmp == 'C')
     {
         id[0] = *tmp;
@@ -51,9 +49,13 @@ static void getting_id(char *tmp, s_file *file)
         filling_struct_part1(tmp, id, file);
     }
     else if (*tmp && file->fill_counter == 6)
+    {
         filling_struct_part3(tmp, file);
+        return 1;
+    }
     else
         exit_check(INVALID_ID, file);
+    return 0;
 }
 
 static char    *reading_file(int fd)
@@ -88,11 +90,23 @@ static char    *reading_file(int fd)
 void    checking_file(int fd, s_file *file)
 {
     char *line;
+    char *ptr;
+    int map_started;
 
+    map_started = 0;
     while ((line = reading_file(fd)))
     {
-        getting_id(line, file);
-        free(line);
+        ptr = line;
+        skip_spaces(&line);
+        if (*line == '\0')
+        {
+            if (map_started == 1)
+                exit_check(EMPTY_LINE_INSIDE_MAP, file);
+            free(ptr);
+            continue;
+        }
+        map_started = getting_id(line, file);
+        free(ptr);
     }
     close(fd);
 }

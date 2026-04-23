@@ -6,7 +6,7 @@
 /*   By: antabord <antabord@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/20 17:26:23 by antabord          #+#    #+#             */
-/*   Updated: 2026/04/21 15:25:59 by antabord         ###   ########.fr       */
+/*   Updated: 2026/04/23 14:19:08 by antabord         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static char     *get_value(char *tmp)
 {
-    while (*tmp == ' ' || *tmp == '\t')
+    while (*tmp == '\n' || *tmp == ' ' || *tmp == '\t')
         tmp++;
     return tmp;
 }
@@ -46,6 +46,9 @@ static void filling_struct_part2(char *tmp, char *id, s_file *file)
 
 void    filling_struct_part1(char *tmp, char *id, s_file *file)
 {
+    skip_spaces(&tmp);
+    if (!tmp || *tmp == '\0')
+            return;
     if (!ft_strncmp(id, "NO", 2) && id[2] == '\0')
     {
         file->NO_texture[0] = ft_strdup(id);
