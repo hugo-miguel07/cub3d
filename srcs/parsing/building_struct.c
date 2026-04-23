@@ -6,7 +6,7 @@
 /*   By: antabord <antabord@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/20 17:26:23 by antabord          #+#    #+#             */
-/*   Updated: 2026/04/23 14:19:08 by antabord         ###   ########.fr       */
+/*   Updated: 2026/04/23 17:53:17 by antabord         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void    filling_struct_part1(char *tmp, char *id, s_file *file)
         filling_struct_part2(tmp, id, file);
 }
 
-static int  map_size(char **map)
+int  map_size(char **map)
 {
     int i;
 

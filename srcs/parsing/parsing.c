@@ -6,7 +6,7 @@
 /*   By: antabord <antabord@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 15:57:30 by htavares          #+#    #+#             */
-/*   Updated: 2026/04/23 14:24:46 by antabord         ###   ########.fr       */
+/*   Updated: 2026/04/23 17:49:44 by antabord         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,6 @@ s_file    parsing(s_file *file, char **av)
     checking_file(fd, file);
     checking_paths(file);
     checking_rgb(file);
-    checking_map(av[1]);
+    checking_chars_n_walls(file, file->map);
     return *file;
 }
