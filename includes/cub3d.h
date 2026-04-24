@@ -6,7 +6,7 @@
 /*   By: antabord <antabord@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 15:51:07 by htavares          #+#    #+#             */
-/*   Updated: 2026/04/23 17:53:29 by antabord         ###   ########.fr       */
+/*   Updated: 2026/04/24 15:22:37 by antabord         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,15 +55,18 @@ typedef struct t_file{
 }   s_file;
 
 exit_check(enum exit_code code, s_file *file);  /*tem que aceitar os args daquilo que s tem que libertar*/
-void free_arr(char **arr);
+void free_arr(char **arr, int index);
 
 /*---------------------Parsing-------------------------*/
 
-s_file    parsing(s_file *file, char **av);
+s_file  parsing(s_file *file, char **av);
 int     checking_cubfile(char *av);
 void    filling_struct_part1(char *tmp, char *id, s_file *file);
 void    checking_rgb(s_file *files);
 void    checking_paths(s_file *file);
 void    checking_chars_n_walls(s_file *file, char **map);
 void    skip_spaces(char **ptr);
-int  map_size(char **map);
+int     map_size(char **map);
+void    map_cpy(s_file *file);
+void    player_pos(s_file *file, char **cpy);
+void    flood_fill(s_file *file, char **map, int y, int x);

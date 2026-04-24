@@ -6,7 +6,7 @@
 /*   By: antabord <antabord@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/21 15:15:11 by antabord          #+#    #+#             */
-/*   Updated: 2026/04/23 14:28:36 by antabord         ###   ########.fr       */
+/*   Updated: 2026/04/24 15:25:38 by antabord         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,12 +60,10 @@ static void    parse_commas(s_file *files, char *ptr)
             skip_spaces(&ptr);
         }
         else if (ft_isdigit(*ptr))
-        {
-            ptr++;
             nbrs++;
-        }
         else
             break;
+        ptr++;
     }
     if (commas != 2 || nbrs > 3 || nbrs == 0 || *ptr != '\0')
         exit_check(INVALID_COLOR_COORDINATES, files);

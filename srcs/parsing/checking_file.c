@@ -6,7 +6,7 @@
 /*   By: antabord <antabord@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/20 13:25:43 by antabord          #+#    #+#             */
-/*   Updated: 2026/04/23 17:52:49 by antabord         ###   ########.fr       */
+/*   Updated: 2026/04/24 12:03:37 by antabord         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,26 +87,30 @@ static char    *reading_file(int fd)
     return line;
 }
 
-void    checking_file(int fd, s_file *file)
-{
-    char *line;
-    char *ptr;
-    int map_started;
 
-    map_started = 0;
+void	checking_file(int fd, s_file *file)
+{
+    char	*line;
+    char	*raw;
+    char	*trim;
+
     while ((line = reading_file(fd)))
     {
-        ptr = line;
-        skip_spaces(&line);
-        if (*line == '\0')
+        raw = line;
+        trim = line;
+        skip_spaces(&trim);
+        if (file->fill_counter < 6)
         {
-            if (map_started == 1)
-                exit_check(EMPTY_LINE_INSIDE_MAP, file);
-            free(ptr);
-            continue;
+            if (*trim == '\0')
+            {
+                free(raw);
+                continue ;
+            }
+            getting_id(trim, file);
         }
-        map_started = getting_id(line, file);
-        free(ptr);
+        else
+            filling_struct_part3(raw, file);
+        free(raw);
     }
     close(fd);
 }
