@@ -25,7 +25,6 @@ void checking_chars_n_walls(s_file *file, char **map)
 {
     int i;
     int j;
-    int last;
 
     i = 0;
     j = 0;

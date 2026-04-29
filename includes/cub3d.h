@@ -54,14 +54,16 @@ typedef struct t_file{
     int fill_counter;
 }   s_file;
 
-exit_check(enum exit_code code, s_file *file);  /*tem que aceitar os args daquilo que s tem que libertar*/
+void exit_check(enum exit_code code, s_file *file);  /*tem que aceitar os args daquilo que s tem que libertar*/
 void free_arr(char **arr, int index);
 
 /*---------------------Parsing-------------------------*/
 
 s_file  parsing(s_file *file, char **av);
 int     checking_cubfile(char *av);
+void    checking_file(int fd, s_file *file);
 void    filling_struct_part1(char *tmp, char *id, s_file *file);
+void    filling_struct_part3(char *tmp, s_file *file);
 void    checking_rgb(s_file *files);
 void    checking_paths(s_file *file);
 void    checking_chars_n_walls(s_file *file, char **map);
