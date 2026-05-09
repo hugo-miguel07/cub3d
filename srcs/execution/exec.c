@@ -10,3 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "cub3d.h"
+
+int	exec(s_file *file)
+{
+	t_game game;
+
+	if (!game_init(&game))
+		return (0);
+	return (1);
+}

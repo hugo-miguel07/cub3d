@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "cub3d.h"
 
 int	main(int ac, char **av)
 {
@@ -20,6 +20,7 @@ int	main(int ac, char **av)
 		exit_check(INVALID_NUMBER_ARGS, NULL);
 	ft_memset(&file, 0, sizeof(file));
 	file = parsing(&file, av);
-	av = NULL;
+	if (!exec(&file))
+		return (1);
 	return (0);
 }

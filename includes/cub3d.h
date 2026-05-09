@@ -15,7 +15,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <stdbool.h>
-#include "../libft/libft.h"
+#include "libft.h"
+#include "mlx.h"
 
 #ifndef BUFFER_SIZE
 #define BUFFER_SIZE 10
@@ -72,3 +73,10 @@ int     map_size(char **map);
 void    map_cpy(s_file *file);
 void    player_pos(s_file *file, char **cpy);
 void    flood_fill(s_file *file, char **map, int y, int x);
+int     exec(s_file *file);
+
+/*--------------------Execution------------------------*/
+
+typedef struct s_game{
+    
+}   t_game;
