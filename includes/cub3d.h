@@ -3,56 +3,64 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antabord <antabord@student.42.fr>          +#+  +:+       +#+        */
+/*   By: htavares <htavares@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 15:51:07 by htavares          #+#    #+#             */
-/*   Updated: 2026/04/24 15:22:37 by antabord         ###   ########.fr       */
+/*   Updated: 2026/05/10 13:30:39 by htavares         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include <fcntl.h>
-#include <stdlib.h>
-#include <stdio.h>
-#include <stdbool.h>
-#include "libft.h"
-#include "mlx.h"
+#ifndef CUB3D_H
+# define CUB3D_H
 
-#ifndef BUFFER_SIZE
-#define BUFFER_SIZE 10
-#endif
+# include <unistd.h>
+# include <fcntl.h>
+# include <stdlib.h>
+# include <stdio.h>
+# include <stdbool.h>
+# include "libft.h"
+# include "mlx.h"
+
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 10
+# endif
+
+# ifndef WINDOW_SIZE
+#  define WIDTHW 1280
+#  define HEIGHTW 720
+# endif
 
 enum exit_code {
-    MALLOC_ERR,
-    INVALID_NUMBER_ARGS,
-    FILE_DOENST_EXIST,
-    NO_READING_PERM,
-    NON_PRINTABLE_CHARS,
-    INVALID_TYPE_FILE,
-    EMPTY_FILE,
-    INVALID_ID,
-    INVALID_NOTEXTURE_PATH,
-    INVALID_SOTEXTURE_PATH,
-    INVALID_EATEXTURE_PATH,
-    INVALID_WETEXTURE_PATH,
-    INVALID_COLOR_COORDINATES,
-    EMPTY_LINE_INSIDE_MAP,
-    INVALID_MAP_CHAR,
-    INVALID_WALLS,
-    INVALID_PLAYER_SPAWN,
+	MALLOC_ERR,
+	INVALID_NUMBER_ARGS,
+	FILE_DOENST_EXIST,
+	NO_READING_PERM,
+	NON_PRINTABLE_CHARS,
+	INVALID_TYPE_FILE,
+	EMPTY_FILE,
+	INVALID_ID,
+	INVALID_NOTEXTURE_PATH,
+	INVALID_SOTEXTURE_PATH,
+	INVALID_EATEXTURE_PATH,
+	INVALID_WETEXTURE_PATH,
+	INVALID_COLOR_COORDINATES,
+	EMPTY_LINE_INSIDE_MAP,
+	INVALID_MAP_CHAR,
+	INVALID_WALLS,
+	INVALID_PLAYER_SPAWN,
 };
 
 
 typedef struct t_file{
-    char **NO_texture;
-    char **SO_texture;
-    char **WE_texture;
-    char **EA_texture;
-    char **F_color;
-    char **C_color;
-    char **map;
-    int player;
-    int fill_counter;
+	char **NO_texture;
+	char **SO_texture;
+	char **WE_texture;
+	char **EA_texture;
+	char **F_color;
+	char **C_color;
+	char **map;
+	int player;
+	int fill_counter;
 }   s_file;
 
 void exit_check(enum exit_code code, s_file *file);  /*tem que aceitar os args daquilo que s tem que libertar*/
@@ -77,6 +85,31 @@ int     exec(s_file *file);
 
 /*--------------------Execution------------------------*/
 
-typedef struct s_game{
-    
+typedef struct s_player
+{
+	double	px;
+	double	py;
+}	t_player;
+
+typedef struct s_frame
+{
+	void	*img_mlx;
+	void	*pixels;
+	int		width;
+	int		height;
+	int		bits_per_pix;
+	int		line_length;
+	int		endian;
+}	t_frame;
+
+typedef struct s_game
+{
+	void		*mlx;
+	void		*win;
+	t_frame		*frame;
+	double		*zbuffer;
+	t_player	player;
+	s_file		*file;
 }   t_game;
+
+#endif
