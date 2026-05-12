@@ -6,7 +6,7 @@
 /*   By: htavares <htavares@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 15:57:19 by htavares          #+#    #+#             */
-/*   Updated: 2026/05/10 13:28:24 by htavares         ###   ########.fr       */
+/*   Updated: 2026/05/12 15:53:20 by htavares         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,10 @@ static void	game_init(t_game *game, s_file *file)
 	game->mlx = NULL;
 	game->win = NULL;
 	game->file = file;
-	game->player.px = 0;
-	game->player.py = 0;
+	game->player.px = -1.0;
+	game->player.py = -1.0;
+	game ->frame = NULL;
+	game->zbuffer = NULL;
 }
 
 static int	start_mlx(t_game *game)
@@ -27,8 +29,9 @@ static int	start_mlx(t_game *game)
 	if (!game->mlx)
 		return (0);
 	game->win = mlx_new_window(game->mlx, WIDTHW, HEIGHTW, "cub3d");
-	if (game->win)
-		return (mlx_destroy_display(game->mlx), 0);
+	if (!game->win)
+		return (mlx_destroy_display(game->mlx), free(game->mlx), 0);
+	find_player(game);
 	return (1);
 }
 
@@ -39,7 +42,13 @@ int	exec(s_file *file)
 	if (!file)
 		return (0);
 	game_init(&game, file);
-	if (start_mlx(&game))
+	if (!start_mlx(&game))
 		return (0);
+	if (!create_frame(&game))
+		return (cleanup_game(&game), 0);
+	if (!create_zbuffer(&game))
+		return (cleanup_game(&game), 0);
+	game_loop(&game);
+	cleanup_game(&game);
 	return (1);
 }

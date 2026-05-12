@@ -3,6 +3,14 @@ CC = cc
 CFLAGS = -Wall -Werror -Wextra -g
 
 SRCS = srcs/main.c \
+		srcs/exit.c \
+		srcs/execution/cleanup.c \
+		srcs/execution/game_utils.c \
+		srcs/execution/frame_init.c \
+		srcs/execution/zbuffer_init.c \
+		srcs/execution/game_loop.c \
+		srcs/execution/drawer.c \
+		srcs/execution/drawer_utils.c \
 		srcs/execution/exec.c \
 		srcs/parsing/parsing.c \
 		srcs/parsing/building_struct.c \
@@ -10,7 +18,7 @@ SRCS = srcs/main.c \
 		srcs/parsing/cubfile_check.c \
 		srcs/parsing/flood_fill.c \
 		srcs/parsing/map_parsing.c \
-		srcs/parsing/validating__coordinates.c \
+		srcs/parsing/validating_coordinates.c \
 
 OBJS = $(SRCS:.c=.o)
 

@@ -6,7 +6,7 @@
 /*   By: htavares <htavares@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 15:51:07 by htavares          #+#    #+#             */
-/*   Updated: 2026/05/10 13:30:39 by htavares         ###   ########.fr       */
+/*   Updated: 2026/05/12 17:35:09 by htavares         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int     map_size(char **map);
 void    map_cpy(s_file *file);
 void    player_pos(s_file *file, char **cpy);
 void    flood_fill(s_file *file, char **map, int y, int x);
-int     exec(s_file *file);
+void	exit_check(enum exit_code code, s_file *file);
 
 /*--------------------Execution------------------------*/
 
@@ -111,5 +111,15 @@ typedef struct s_game
 	t_player	player;
 	s_file		*file;
 }   t_game;
+
+int				exec(s_file *file);
+void			cleanup_game(t_game *game);
+void			find_player(t_game *game);
+int				create_frame(t_game *game);
+int				create_zbuffer(t_game *game);
+void			game_loop(t_game *game);
+void			draw_scene(t_game *game);
+unsigned int	parse_rgb(char *str);
+void			put_pixel(t_frame *f, int x, int y, unsigned int color);
 
 #endif
