@@ -6,7 +6,7 @@
 /*   By: htavares <htavares@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 15:51:07 by htavares          #+#    #+#             */
-/*   Updated: 2026/05/13 11:35:32 by htavares         ###   ########.fr       */
+/*   Updated: 2026/05/13 12:57:28 by htavares         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,20 @@
 # include <stdlib.h>
 # include <stdio.h>
 # include <stdbool.h>
+# include <math.h>
 # include "libft.h"
 # include "mlx.h"
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 10
+# endif
+
+# ifndef M_PI
+#  define M_PI 3.14159265358979323846
+# endif
+
+# ifndef FOV
+#  define FOV 100.00
 # endif
 
 # ifndef WINDOW_SIZE
@@ -89,6 +98,11 @@ typedef struct s_player
 {
 	double	px;
 	double	py;
+	double	angle;
+	double	dirX;
+	double	dirY;
+	double	planeX;
+	double	planeY;
 }	t_player;
 
 typedef struct s_frame
