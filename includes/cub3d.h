@@ -43,12 +43,12 @@ enum exit_code {
 
 
 typedef struct t_file{
-    char **NO_texture;
-    char **SO_texture;
-    char **WE_texture;
-    char **EA_texture;
-    char **F_color;
-    char **C_color;
+    char *NO_texture[2];
+    char *SO_texture[2];
+    char *WE_texture[2];
+    char *EA_texture[2];
+    char *F_color[2];
+    char *C_color[2];
     char **map;
     int player;
     int fill_counter;
@@ -56,12 +56,13 @@ typedef struct t_file{
 
 void exit_check(enum exit_code code, s_file *file);  /*tem que aceitar os args daquilo que s tem que libertar*/
 void free_arr(char **arr, int index);
+void    cleanup(s_file *file);
 
 /*---------------------Parsing-------------------------*/
 
 s_file  parsing(s_file *file, char **av);
+void	checking_file(int fd, s_file *file);
 int     checking_cubfile(char *av);
-void    checking_file(int fd, s_file *file);
 void    filling_struct_part1(char *tmp, char *id, s_file *file);
 void    filling_struct_part3(char *tmp, s_file *file);
 void    checking_rgb(s_file *files);

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../../includes/cub3d.h"
 
 void skip_spaces(char **ptr)
 {
@@ -37,7 +37,7 @@ void    checking_paths(s_file *file)
     fd = open(file->WE_texture[1], O_RDONLY);
     if (fd == -1)
         exit_check(INVALID_WETEXTURE_PATH, file);
-    if (!file->C_color || !file->F_color || !file->C_color[1] || !file->F_color[1])
+    if (!file->C_color[1] || !file->F_color[1])
         exit_check(INVALID_COLOR_COORDINATES, file);
     close(fd);
 }

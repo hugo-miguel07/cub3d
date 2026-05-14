@@ -10,8 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
-#include "cub3d.h"
+#include "../../includes/cub3d.h"
 
 int    checking_cubfile(char *av)
 {

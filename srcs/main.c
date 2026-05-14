@@ -20,6 +20,8 @@ int	main(int ac, char **av)
 		exit_check(INVALID_NUMBER_ARGS, NULL);
 	ft_memset(&file, 0, sizeof(file));
 	file = parsing(&file, av);
+	printf("OK\n");
+	cleanup(&file);
 	av = NULL;
 	return (0);
 }

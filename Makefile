@@ -3,8 +3,14 @@ CC = cc
 CFLAGS = -Wall -Werror -Wextra -g
 
 SRCS = srcs/main.c \
-		srcs/execution/exec.c \
+		srcs/exit.c \
+		srcs/parsing/building_struct.c \
+		srcs/parsing/checking_file.c \
+		srcs/parsing/cubfile_check.c \
+		srcs/parsing/flood_fill.c \
+		srcs/parsing/map_parsing.c \
 		srcs/parsing/parsing.c \
+		srcs/parsing/validating_coordinates.c \
 
 
 OBJS = $(SRCS:.c=.o)
@@ -15,9 +21,9 @@ LIBFT = $(LIBFT_DIR)/libft.a
 MLX_DIR = minilibx
 MLX = $(MLX_DIR)/libmlx.a
 
-INCLUDES = -I, -I$(LIBFT_DIR) -I$(MLX_DIR)
+INCLUDES = -Iincludes -I$(LIBFT_DIR) -I$(MLX_DIR)
 
-%.0: %.c
+%.o: %.c
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 all: $(LIBFT) $(MLX) $(NAME)

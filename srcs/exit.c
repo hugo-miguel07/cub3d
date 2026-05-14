@@ -1,81 +1,122 @@
 #include "cub3d.h"
 
-exit_check(enum exit_code code, s_file *file)
+void    exit_check(enum exit_code code, s_file *file)
 {
     switch (code)
     {
     case INVALID_NUMBER_ARGS:
-        perror("ERROR: Inavlid number of args");
+        fprintf(stderr, "ERROR: Inavlid number of args\n");
         break;
     case MALLOC_ERR:
-        perror("ERROR: malloc");
+        fprintf(stderr, "ERROR: malloc\n");
         break;
     case FILE_DOENST_EXIST:
-        perror("ERROR: File doesn't exixt");
+        fprintf(stderr, "ERROR: File doesn't exixt\n");
         break;
     case NO_READING_PERM:
-        perror("ERROR: Invalid file permissions");
+        fprintf(stderr, "ERROR: Invalid file permissions\n");
         break;
     case NON_PRINTABLE_CHARS:
-        perror("ERROR: File name cnat have non-printable chars");
+        fprintf(stderr, "ERROR: File name cnat have non-printable chars\n");
         break;
     case INVALID_TYPE_FILE:
-        perror("ERROR: File must terminate with ".cub"");
+        fprintf(stderr, "ERROR: File must terminate with .cub\n");
         break;
     case EMPTY_FILE:
-        perror("ERROR: File is empty");
+        fprintf(stderr, "ERROR: File is empty\n");
+        break;
     case INVALID_ID:
-        perror("ERROR: INVALID ID");
+        fprintf(stderr, "ERROR: INVALID ID\n");
         break;
     case INVALID_NOTEXTURE_PATH:
-        perror("ERROR: INVALID NO texture");
-        break,
+        fprintf(stderr, "ERROR: INVALID NO texture\n");
+        break;
     case INVALID_SOTEXTURE_PATH:
-        perror("ERROR: INVALID SO texture");
+        fprintf(stderr, "ERROR: INVALID SO texture\n");
         break;
     case INVALID_EATEXTURE_PATH:
-        perror("ERROR: INVALID EA texture");
+        fprintf(stderr, "ERROR: INVALID EA texture\n");
         break;
     case INVALID_WETEXTURE_PATH:
-        perror("ERROR: INVALID WE texture");
+        fprintf(stderr, "ERROR: INVALID WE texture\n");
+        break;
     case INVALID_COLOR_COORDINATES:
-        perror("ERROR: INVALID color coordinates");
+        fprintf(stderr, "ERROR: INVALID color coordinates\n");
         break;
     case EMPTY_LINE_INSIDE_MAP:
-        perror("ERROR: Empty line inside map");
-        break;
-    case EMPTY_LINE_INSIDE_MAP:
-        perror("ERROR: Empty line inside map");
+        fprintf(stderr, "ERROR: Empty line inside map\n");
         break;
     case INVALID_MAP_CHAR:
-        perror("ERROR: Invalid map char");
+        fprintf(stderr, "ERROR: Invalid map char\n");
         break;
     case INVALID_WALLS:
-        perror("ERROR: Invalid walls");
+        fprintf(stderr, "ERROR: Invalid walls\n");
         break;
     case INVALID_PLAYER_SPAWN:
-        perror("ERROR: Invalid spawn");
+        fprintf(stderr, "ERROR: Invalid spawn\n");
         break;
     default:
         break;
     }
-    cleanup_exit
+    cleanup(file);
+}
+
+void    cleanup(s_file *file)
+{
+    if (!file)
+        exit(1);
+    if (file->NO_texture[0])
+        free(file->NO_texture[0]);
+    if (file->NO_texture[1])
+        free(file->NO_texture[1]);
+    if (file->SO_texture[0])
+        free(file->SO_texture[0]);
+    if (file->SO_texture[1])
+        free(file->SO_texture[1]);
+    if (file->WE_texture[0])
+        free(file->WE_texture[0]);
+    if (file->WE_texture[1])
+        free(file->WE_texture[1]);
+    if (file->EA_texture[0])
+        free(file->EA_texture[0]);
+    if (file->EA_texture[1])
+        free(file->EA_texture[1]);
+    if (file->F_color[0])
+        free(file->F_color[0]);
+    if (file->F_color[1])
+        free(file->F_color[1]);
+    if (file->C_color[0])
+        free(file->C_color[0]);
+    if (file->C_color[1])
+        free(file->C_color[1]);
+    if (file->map)
+        free_arr(file->map, 0);
+    exit(1);
 }
 
 void free_arr(char **arr, int index)
 {
     int i;
 
-    i = -1;
+    if (!arr)
+        return;
+    i = 0;
     if (!index)
     {
-        while (arr[++i])
+        while (arr[i])
+        {
             free(arr[i]);
+            i++;
+        }
     }
     else
     {
-        while (++i < index)
-            free(arr[i]);
+        while (i < index)
+        {
+            if (arr[i])
+                free(arr[i]);
+            i++;
+        }
     }
     free(arr);
 }
