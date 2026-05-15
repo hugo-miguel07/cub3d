@@ -6,7 +6,7 @@
 /*   By: htavares <htavares@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 15:51:07 by htavares          #+#    #+#             */
-/*   Updated: 2026/05/13 12:57:28 by htavares         ###   ########.fr       */
+/*   Updated: 2026/05/15 14:43:02 by htavares         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,6 +126,35 @@ typedef struct s_game
 	s_file		*file;
 }   t_game;
 
+typedef struct s_rt_state
+{
+	// DDA stepping
+	int				mapX;
+	int				mapY;
+	int				stepX;
+	int				stepY;
+	double			deltaDistX;
+	double			deltaDistY;
+	double			sideDistX;
+	double			sideDistY;
+
+	// Ray data
+	double			rayDirX;
+	double			rayDirY;
+	double			cameraX;
+
+	// Results
+	int				side;
+	int				hit;
+	double			perpWallDist;
+
+	// Wall rendering
+	int				lineHeight;
+	int				drawStart;
+	int				drawEnd;
+	unsigned int	color;
+}	t_rt_state;
+
 int				exec(s_file *file);
 void			cleanup_game(t_game *game);
 void			find_player(t_game *game);
@@ -135,5 +164,8 @@ void			game_loop(t_game *game);
 void			draw_scene(t_game *game);
 unsigned int	parse_rgb(char *str);
 void			put_pixel(t_frame *f, int x, int y, unsigned int color);
+void			init_ray(t_game *game, t_rt_state *rt, int x);
+void			cast_dda(t_game *game, t_rt_state *rt);
+void			calc_wall_height(t_game *game, t_rt_state *rt);
 
 #endif
