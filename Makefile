@@ -11,6 +11,7 @@ SRCS = srcs/main.c \
 		srcs/execution/game_loop.c \
 		srcs/execution/drawer.c \
 		srcs/execution/drawer_utils.c \
+		srcs/execution/raycasting.c \
 		srcs/execution/exec.c \
 		srcs/parsing/parsing.c \
 		srcs/parsing/building_struct.c \
