@@ -39,6 +39,8 @@
 #  define HEIGHTW 720
 # endif
 
+/***************************Parsing******************************* */
+
 enum exit_code {
 	MALLOC_ERR,
 	INVALID_NUMBER_ARGS,
@@ -74,8 +76,6 @@ typedef struct t_file{
 
 void exit_check(enum exit_code code, s_file *file);  /*tem que aceitar os args daquilo que s tem que libertar*/
 void free_arr(char **arr, int index);
-
-/*---------------------Parsing-------------------------*/
 
 s_file  parsing(s_file *file, char **av);
 int     checking_cubfile(char *av);
@@ -125,6 +125,16 @@ typedef struct s_game
 	t_player	player;
 	s_file		*file;
 }   t_game;
+
+typedef struct s_minimap
+{
+	int		height;
+	int		width;
+	int		tile_size;
+	int		radius;
+	int		x_offset;
+	int		y_offset;
+}	t_minimap;
 
 int				exec(s_file *file);
 void			cleanup_game(t_game *game);
