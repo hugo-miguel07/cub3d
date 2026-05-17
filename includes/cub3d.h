@@ -126,7 +126,7 @@ typedef struct s_game
 	s_file		*file;
 }   t_game;
 
-<<<<<<< HEAD
+
 typedef struct s_minimap
 {
 	int		height;
@@ -150,5 +150,6 @@ void			put_pixel(t_frame *f, int x, int y, unsigned int color);
 void			init_ray(t_game *game, t_rt_state *rt, int x);
 void			cast_dda(t_game *game, t_rt_state *rt);
 void			calc_wall_height(t_game *game, t_rt_state *rt);
+void			draw_minimap(t_game *game);
 
 #endif
