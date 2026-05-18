@@ -6,7 +6,7 @@
 /*   By: htavares <htavares@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 15:51:07 by htavares          #+#    #+#             */
-/*   Updated: 2026/05/15 14:43:02 by htavares         ###   ########.fr       */
+/*   Updated: 2026/05/18 17:45:26 by htavares         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,14 @@
 
 # ifndef FOV
 #  define FOV 100.00
+# endif
+
+# ifndef STEPSPEED
+#  define STEPSPEED 0.12
+# endif
+
+# ifndef ROTATIONSPEED
+#  define ROTATIONSPEED 0.05
 # endif
 
 # ifndef WINDOW_SIZE
@@ -127,6 +135,35 @@ typedef struct s_game
 }   t_game;
 
 
+typedef struct s_rt_state
+{
+	// DDA stepping
+	int				mapX;
+	int				mapY;
+	int				stepX;
+	int				stepY;
+	double			deltaDistX;
+	double			deltaDistY;
+	double			sideDistX;
+	double			sideDistY;
+
+	// Ray data
+	double			rayDirX;
+	double			rayDirY;
+	double			cameraX;
+
+	// Results
+	int				side;
+	int				hit;
+	double			perpWallDist;
+
+	// Wall rendering
+	int				lineHeight;
+	int				drawStart;
+	int				drawEnd;
+	unsigned int	color;
+}	t_rt_state;
+
 typedef struct s_minimap
 {
 	int		height;
@@ -151,5 +188,8 @@ void			init_ray(t_game *game, t_rt_state *rt, int x);
 void			cast_dda(t_game *game, t_rt_state *rt);
 void			calc_wall_height(t_game *game, t_rt_state *rt);
 void			draw_minimap(t_game *game);
+int				render(t_game *game);
+int				move_player(int keycode, t_game *game);
+int				look_player(int keycode, t_game *game);
 
 #endif

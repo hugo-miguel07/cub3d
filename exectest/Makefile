@@ -12,6 +12,7 @@ SRCS = main.c \
 		../srcs/execution/drawer.c \
 		../srcs/execution/drawer_utils.c \
 		../srcs/execution/raycasting.c \
+		../srcs/execution/player_moves.c \
 		../srcs/execution/exec.c \
 
 OBJS = $(SRCS:.c=.o)

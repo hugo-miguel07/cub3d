@@ -6,7 +6,7 @@
 /*   By: htavares <htavares@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/12 15:01:02 by htavares          #+#    #+#             */
-/*   Updated: 2026/05/12 15:39:20 by htavares         ###   ########.fr       */
+/*   Updated: 2026/05/18 17:31:45 by htavares         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,20 @@ int	close_window(t_game *game)
 
 int	key_press(int keycode, t_game *game)
 {
+	double	stepspeed;
+	double	nx;
+	double	ny;
+
+	stepspeed = STEPSPEED;
+	nx = game->player.px;
+	ny = game->player.py;
 	if (keycode == 65307)
     {
         cleanup_game(game);
         exit(0);
     }
+	move_player(keycode, game);
+	look_player(keycode, game);
 	return (0);
 }
 
