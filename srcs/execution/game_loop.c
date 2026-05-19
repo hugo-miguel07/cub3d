@@ -6,7 +6,7 @@
 /*   By: htavares <htavares@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/12 15:01:02 by htavares          #+#    #+#             */
-/*   Updated: 2026/05/19 14:35:29 by htavares         ###   ########.fr       */
+/*   Updated: 2026/05/19 16:43:51 by htavares         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,34 +27,34 @@ int	key_press(int keycode, t_game *game)
         exit(0);
     }
 	if (keycode == 119)
-		game->input.w = true;
+		game->input.w = 1;
 	else if (keycode == 115)
-		game->input.s = true;
+		game->input.s = 1;
 	else if (keycode == 97)
-		game->input.a = true;
+		game->input.a = 1;
 	else if (keycode == 100)
-		game->input.d = true;
+		game->input.d = 1;
 	else if (keycode == 65361)
-		game->input.left = true;
+		game->input.left = 1;
 	else if (keycode == 65363)
-		game->input.right = true;
+		game->input.right = 1;
 	return (0);
 }
 
 int	key_release(int keycode, t_game *game)
 {
 	if (keycode == 119)
-		game->input.w = false;
+		game->input.w = 0;
 	else if (keycode == 115)
-		game->input.s = false;
+		game->input.s = 0;
 	else if (keycode == 97)
-		game->input.a = false;
+		game->input.a = 0;
 	else if (keycode == 100)
-		game->input.d = false;
+		game->input.d = 0;
 	else if (keycode == 65361)
-		game->input.left = false;
+		game->input.left = 0;
 	else if (keycode == 65363)
-		game->input.right = false;
+		game->input.right = 0;
 	return (0);
 }
 
