@@ -6,7 +6,7 @@
 /*   By: htavares <htavares@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 15:57:19 by htavares          #+#    #+#             */
-/*   Updated: 2026/05/19 14:55:39 by htavares         ###   ########.fr       */
+/*   Updated: 2026/05/19 17:08:42 by htavares         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ static void	game_init(t_game *game, s_file *file)
 	game->input.right = 0;
 	game ->frame = NULL;
 	game->zbuffer = NULL;
+	ft_bzero(&game->textures, sizeof(t_textures));
 }
 
 static int	start_mlx(t_game *game)
@@ -48,13 +49,15 @@ static int	start_mlx(t_game *game)
 
 int	exec(s_file *file)
 {
-	t_game game;
+	t_game	game;
 
 	if (!file)
 		return (0);
 	game_init(&game, file);
 	if (!start_mlx(&game))
 		return (0);
+	if (!load_textures(&game))
+		return (cleanup_game(&game), 0);
 	if (!create_frame(&game))
 		return (cleanup_game(&game), 0);
 	if (!create_zbuffer(&game))

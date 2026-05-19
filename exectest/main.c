@@ -6,7 +6,7 @@
 /*   By: htavares <htavares@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/29 00:00:00 by copilot           #+#    #+#             */
-/*   Updated: 2026/05/13 13:30:37 by htavares         ###   ########.fr       */
+/*   Updated: 2026/05/19 17:39:23 by htavares         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,12 @@ static void	setup_testfile(s_file *file)
 
 	mapsize = 10;
 	file->map = ft_calloc(mapsize + 1, sizeof(char *));
-	file->F_color = ft_calloc(2, sizeof(char *));
-	file->C_color = ft_calloc(2, sizeof(char *));
-	file->EA_texture = ft_calloc(2, sizeof(char *));
-	file->WE_texture = ft_calloc(2, sizeof(char *));
-	file->SO_texture = ft_calloc(2, sizeof(char *));
-	file->NO_texture = ft_calloc(2, sizeof(char *));
+	file->F_color = ft_calloc(3, sizeof(char *));
+	file->C_color = ft_calloc(3, sizeof(char *));
+	file->EA_texture = ft_calloc(3, sizeof(char *));
+	file->WE_texture = ft_calloc(3, sizeof(char *));
+	file->SO_texture = ft_calloc(3, sizeof(char *));
+	file->NO_texture = ft_calloc(3, sizeof(char *));
 	i = 0;
 	while (i < mapsize)
 	{
@@ -46,16 +46,22 @@ static void	setup_testfile(s_file *file)
 	file->map[mapsize / 2][mapsize / 2] = 'N';
 	file->F_color[0] = ft_strdup("F");
 	file->F_color[1] = ft_strdup("113,115,102");
+	file->F_color[2] = NULL;
 	file->C_color[0] = ft_strdup("C");
 	file->C_color[1] = ft_strdup("135,206,235");
+	file->C_color[2] = NULL;
 	file->NO_texture[0] = ft_strdup("NO");
-	file->NO_texture[1] = NULL;
+	file->NO_texture[1] = ft_strdup("../imgs/Wall1.xpm");
+	file->NO_texture[2] = NULL;
 	file->SO_texture[0] = ft_strdup("SO");
-	file->SO_texture[1] = NULL;
+	file->SO_texture[1] = ft_strdup("../imgs/Wall2.xpm");
+	file->SO_texture[2] = NULL;
 	file->WE_texture[0] = ft_strdup("WE");
-	file->WE_texture[1] = NULL;
+	file->WE_texture[1] = ft_strdup("../imgs/Wall3.xpm");
+	file->WE_texture[2] = NULL;
 	file->EA_texture[0] = ft_strdup("EA");
-	file->EA_texture[1] = NULL;
+	file->EA_texture[1] = ft_strdup("../imgs/Wall4.xpm");
+	file->EA_texture[2] = NULL;
 	file->fill_counter = 6;
 }
 

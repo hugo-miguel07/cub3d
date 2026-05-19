@@ -12,6 +12,7 @@ SRCS = srcs/main.c \
 		srcs/execution/drawer.c \
 		srcs/execution/drawer_utils.c \
 		srcs/execution/raycasting.c \
+		srcs/execution/textures.c \
 		srcs/execution/exec.c \
 		srcs/execution/mini_map.c \
 		srcs/parsing/parsing.c \

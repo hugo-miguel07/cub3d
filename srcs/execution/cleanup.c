@@ -72,6 +72,7 @@ void	cleanup_game(t_game *game)
 		cleanup_frame(game);
 		game->frame = NULL;
 	}
+	destroy_textures(game);
 	if (game->win)
 	{
 		mlx_destroy_window(game->mlx, game->win);

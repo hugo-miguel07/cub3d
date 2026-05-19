@@ -134,12 +134,32 @@ typedef struct s_frame
 	int		endian;
 }	t_frame;
 
+typedef struct s_texture
+{
+	void	*img_mlx;
+	void	*pixels;
+	int		width;
+	int		height;
+	int		bits_per_pix;
+	int		line_length;
+	int		endian;
+}	t_texture;
+
+typedef struct s_textures
+{
+	t_texture	no;
+	t_texture	so;
+	t_texture	we;
+	t_texture	ea;
+}	t_textures;
+
 typedef struct s_game
 {
 	void		*mlx;
 	void		*win;
 	t_frame		*frame;
 	double		*zbuffer;
+	t_textures	textures;
 	t_player	player;
 	t_input		input;
 	s_file		*file;
@@ -173,6 +193,7 @@ typedef struct s_rt_state
 	int				drawStart;
 	int				drawEnd;
 	unsigned int	color;
+	t_texture		*tex;
 }	t_rt_state;
 
 typedef struct s_minimap
@@ -191,6 +212,8 @@ void			cleanup_game(t_game *game);
 void			find_player(t_game *game);
 int				create_frame(t_game *game);
 int				create_zbuffer(t_game *game);
+int				load_textures(t_game *game);
+void			destroy_textures(t_game *game);
 void			game_loop(t_game *game);
 void			draw_scene(t_game *game);
 unsigned int	parse_rgb(char *str);
