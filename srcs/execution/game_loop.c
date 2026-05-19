@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_loop.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: htavares <htavares@student.42.fr>          +#+  +:+       +#+        */
+/*   By: antabord <antabord@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/12 15:01:02 by htavares          #+#    #+#             */
-/*   Updated: 2026/05/19 14:35:29 by htavares         ###   ########.fr       */
+/*   Updated: 2026/05/19 18:06:59 by antabord         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ int	render(t_game *game)
 	move_player(game);
 	look_player(game);
 	draw_scene(game);
+	draw_minimap(game);
 	mlx_put_image_to_window(game->mlx, game->win, game->frame->img_mlx, 0, 0);
 	return (1);
 }

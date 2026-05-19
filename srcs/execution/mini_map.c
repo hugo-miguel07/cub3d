@@ -5,30 +5,29 @@ static void	set_to_default(t_minimap *mm)
     mm->height = 0;
     mm->width = 0;
     mm->radius = 5;
-    mm->x_offset = 10;
-    mm->y_offset = 10;
+    mm->x_offset = 5;
+    mm->y_offset = 5;
     mm->tile_size = 8;
+    mm->color = 0;
 }
 
-static void putting_map_pixel(t_game *game, t_minimap *mm)
+static void coloring_minimap(t_frame *frame, int start_x, int start_y, t_minimap *mm)
 {
     int x;
     int y;
 
-    x = 0;
+    if (!frame || mm->tile_size <= 0)
+        return;
     y = 0;
     while (y < mm->tile_size)
     {
         x = 0;
-            while (x < mm->tile_size)
-            {
-                put_pixel(game->frame,
-                    mm->x_offset + map_x * mm->tile_size + x,
-                    mm->y_offset + map_y * mm->tile_size + y,
-                    color);
-                x++;
-            }
-            y++;
+        while (x < mm->tile_size)
+        {
+            put_pixel(frame, start_x + x, start_y + y, mm->color);
+            x++;
+        }
+        y++;
     }
 }
 
@@ -36,26 +35,27 @@ static void	draw_map(t_game *game, t_minimap *mm)
 {
     int				map_y;
     int				map_x;
-    int				x;
-    int				y;
-    unsigned int	color;
 
-    map_y = 0;
-    while (game->file->map[map_y++])
+    map_y = -1;
+    while (game->file->map[++map_y])
     {
-        map_x = 0;
-        while (game->file->map[map_y][map_x++])
+        map_x = -1;
+        while (game->file->map[map_y][++map_x])
         {
             if (game->file->map[map_y][map_x] == '1')
-                color = 0x00FFFFFF;
+                mm->color = 0x00FFFFFF;
             else if (game->file->map[map_y][map_x] == '0'
                 || game->file->map[map_y][map_x] == 'N'
                 || game->file->map[map_y][map_x] == 'S'
                 || game->file->map[map_y][map_x] == 'E'
                 || game->file->map[map_y][map_x] == 'W')
-                color = 0x00333333;
+                mm->color = 0x00333333;
             else
-                color = 0x00000000;
+                mm->color = 0x00000000;
+            coloring_minimap(game->frame,
+                (map_x + mm->x_offset) * mm->tile_size,
+                (map_y + mm->y_offset) * mm->tile_size,
+                mm);
         }
     }
 }
@@ -66,14 +66,16 @@ static void	draw_player(t_game *game, t_minimap *mm)
     int	py;
     int	x;
     int	y;
+    int size;
 
-    px = mm->x_offset + (int)game->player.px * mm->tile_size;
-    py = mm->y_offset + (int)game->player.py * mm->tile_size;
-    y = -2;
-    while (y <= 2)
+    size = 8;
+    px = (int)((mm->x_offset + game->player.px) * mm->tile_size) - (size / 2);
+    py = (int)((mm->y_offset + game->player.py) * mm->tile_size) - (size / 2);
+    y = 0;
+    while (y < size)
     {
-        x = -2;
-        while (x <= 2)
+        x = 0;
+        while (x < size)
         {
             put_pixel(game->frame, px + x, py + y, 0x00FF0000);
             x++;
@@ -93,16 +95,4 @@ void	draw_minimap(t_game *game)
     draw_player(game, &mini_map);
 }
 
-
-
-void    draw_minimap(t_game *game)
-{
-    t_minimap   mini_map;
-
-    if (!game || !game->frame || !game->file || !game->file->map)
-        return ;
-    set_to_default(&mini_map);
-    draw_map(&mini_map, game);
-    draw_player(&mini_map, game);
-}
 

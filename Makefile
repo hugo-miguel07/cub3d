@@ -14,6 +14,7 @@ SRCS = srcs/main.c \
 		srcs/execution/raycasting.c \
 		srcs/execution/exec.c \
 		srcs/execution/mini_map.c \
+		srcs/execution/player_moves.c \
 		srcs/parsing/parsing.c \
 		srcs/parsing/building_struct.c \
 		srcs/parsing/checking_file.c \

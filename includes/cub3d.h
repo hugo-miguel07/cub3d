@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: htavares <htavares@student.42.fr>          +#+  +:+       +#+        */
+/*   By: antabord <antabord@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 15:51:07 by htavares          #+#    #+#             */
-/*   Updated: 2026/05/19 14:58:17 by htavares         ###   ########.fr       */
+/*   Updated: 2026/05/19 17:17:15 by antabord         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,6 +183,7 @@ typedef struct s_minimap
 	int		radius;
 	int		x_offset;
 	int		y_offset;
+	int		color;
 }	t_minimap;
 
 
