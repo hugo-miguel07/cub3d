@@ -6,7 +6,7 @@
 /*   By: htavares <htavares@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 15:57:19 by htavares          #+#    #+#             */
-/*   Updated: 2026/05/13 12:58:14 by htavares         ###   ########.fr       */
+/*   Updated: 2026/05/19 14:55:39 by htavares         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,12 @@ static void	game_init(t_game *game, s_file *file)
 	game->player.dirY = 0.0;
 	game->player.planeX = 0.0;
 	game->player.planeY = 0.0;
+	game->input.w = 0;
+	game->input.s = 0;
+	game->input.a = 0;
+	game->input.d = 0;
+	game->input.left = 0;
+	game->input.right = 0;
 	game ->frame = NULL;
 	game->zbuffer = NULL;
 }

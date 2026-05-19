@@ -6,13 +6,13 @@
 /*   By: htavares <htavares@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/18 17:16:57 by htavares          #+#    #+#             */
-/*   Updated: 2026/05/18 17:53:54 by htavares         ###   ########.fr       */
+/*   Updated: 2026/05/19 14:58:01 by htavares         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static int	can_move(t_game *game, double nx, double ny)
+static int	canmove(t_game *game, double nx, double ny)
 {
 	int	mx;
 	int	my;
@@ -28,16 +28,26 @@ static int	can_move(t_game *game, double nx, double ny)
 	return (game->file->map[my][mx] != '1');
 }
 
-int	look_player(int keycode, t_game *game)
+int	look_player(t_game *game)
 {
 	double	rotationspeed;
 	double	plane_len;
+	int		rotated;
 
 	rotationspeed = ROTATIONSPEED;
-	if (keycode == 65361) /* Left Arrow */
+	rotated = 0;
+	if (game->input.left)
+	{
 		game->player.angle += rotationspeed;
-	else if (keycode == 65363) /* Right Arrow */
+		rotated = 1;
+	}
+	if (game->input.right)
+	{
 		game->player.angle -= rotationspeed;
+		rotated = 1;
+	}
+	if (!rotated)
+		return (0);
 	game->player.dirX = cos(game->player.angle);
 	game->player.dirY = sin(game->player.angle);
 	plane_len = tan(FOV / 2.0);
@@ -46,39 +56,67 @@ int	look_player(int keycode, t_game *game)
     return (0);
 }
 
-int	move_player(int keycode, t_game *game)
+static int	move_frontback(t_game *g, double *nx, double *ny, double ss)
+{
+	int	moved;
+
+	moved = 0;
+	if (g->input.w)
+	{
+		*ny += g->player.dirY * ss;
+		*nx += g->player.dirX * ss;
+		moved = 1;
+	}
+	else if (g->input.s)
+	{
+		*ny -= g->player.dirY * ss;
+		*nx -= g->player.dirX * ss;
+		moved = 1;
+	}
+	return (moved);
+}
+
+static int	move_sideways(t_game *g, double *nx, double *ny, double ss)
+{
+	int	moved;
+
+	moved = 0;
+	if (g->input.a)
+	{
+		*ny += g->player.dirX * ss;
+		*nx += -g->player.dirY * ss;
+		moved = 1;
+	}
+	else if (g->input.d)
+	{
+		*ny -= g->player.dirX * ss;
+		*nx -= -g->player.dirY * ss;
+		moved = 1;
+	}
+	return (moved);
+}
+
+int	move_player(t_game *g)
 {
 	double	stepspeed;
 	double	nx;
 	double	ny;
+	int		moved;
 
 	stepspeed = STEPSPEED;
-	nx = game->player.px;
-	ny = game->player.py;
-	if (keycode == 119) /* W / Up */
-	{
-        ny += game->player.dirY * stepspeed;
-		nx += game->player.dirX * stepspeed;
-	}
-    else if (keycode == 115) /* S / Down */
-	{
-		ny -= game->player.dirY * stepspeed;
-		nx -= game->player.dirX * stepspeed;
-	}
-    else if (keycode == 97) /* A / Left */
-	{
-		ny += game->player.dirX * stepspeed;
-		nx += -game->player.dirY * stepspeed;
-	}
-    else if (keycode == 100) /* D / Right */
-	{
-		ny -= game->player.dirX * stepspeed;
-		nx -= -game->player.dirY * stepspeed;
-	}
-    if ((nx != game->player.px || ny != game->player.py) && can_move(game, nx, ny))
+	nx = g->player.px;
+	ny = g->player.py;
+	moved = 0;
+	if (g->input.w || g->input.s)
+		moved = move_frontback(g, &nx, &ny, stepspeed);
+	if (g->input.a || g->input.d)
+		moved = move_sideways(g, &nx, &ny, stepspeed);
+	if (!moved)
+		return (0);
+    if ((nx != g->player.px || ny != g->player.py) && canmove(g, nx, ny))
     {
-        game->player.px = nx;
-        game->player.py = ny;
+        g->player.px = nx;
+        g->player.py = ny;
     }
 	return (0);
 }

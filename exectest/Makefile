@@ -51,4 +51,9 @@ fclean : clean
 
 re : fclean all
 
-.PHONY: all clean fclean re bonus
+hugo : fclean all
+	@rm -f $(OBJS)
+	$(MAKE) -C $(LIBFT_DIR) clean
+	$(MAKE) -C $(MLX_DIR) clean
+
+.PHONY: all clean fclean re hugo

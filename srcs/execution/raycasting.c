@@ -6,7 +6,7 @@
 /*   By: htavares <htavares@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/15 14:32:42 by htavares          #+#    #+#             */
-/*   Updated: 2026/05/18 17:53:59 by htavares         ###   ########.fr       */
+/*   Updated: 2026/05/19 15:04:36 by htavares         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,12 +64,13 @@ void	cast_dda(t_game *game, t_rt_state *rt)
             rt->mapY += rt->stepY;
             rt->side = 1;
         }
-        if (!game->file->map[rt->mapX] || rt->mapY < 0 || !game->file->map[rt->mapX][rt->mapY])
+        if (rt->mapY < 0 || !game->file->map[rt->mapY]
+            || rt->mapX < 0 || !game->file->map[rt->mapY][rt->mapX])
         {
             rt->hit = 1;
             break;
         }
-        if (game->file->map[rt->mapX][rt->mapY] == '1')
+        if (game->file->map[rt->mapY][rt->mapX] == '1')
             rt->hit = 1;
     }
     if (rt->side == 0)

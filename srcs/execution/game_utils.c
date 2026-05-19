@@ -6,7 +6,7 @@
 /*   By: htavares <htavares@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/12 12:30:55 by htavares          #+#    #+#             */
-/*   Updated: 2026/05/13 13:09:43 by htavares         ###   ########.fr       */
+/*   Updated: 2026/05/19 15:04:25 by htavares         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,21 +46,21 @@ void	find_player(t_game *game)
 	if (!game)
 		return ;
 	map = game->file->map;
-	x = 0;
-	while (map[x])
+	y = 0;
+	while (map[y])
 	{
-		y = 0;
-		while (map[x][y])
+		x = 0;
+		while (map[y][x])
 		{
-			if (map[x][y] == 'N' || map[x][y] == 'S'
-				|| map[x][y] == 'E' || map[x][y] == 'W')
+			if (map[y][x] == 'N' || map[y][x] == 'S'
+				|| map[y][x] == 'E' || map[y][x] == 'W')
 			{
 				set_playerpos(game, x, y);
-				set_playerangle(game, map[x][y]);
+				set_playerangle(game, map[y][x]);
 				return ;
 			}
-			y++;
+			x++;
 		}
-		x++;
+		y++;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: htavares <htavares@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/12 15:30:23 by htavares          #+#    #+#             */
-/*   Updated: 2026/05/15 15:01:20 by htavares         ###   ########.fr       */
+/*   Updated: 2026/05/19 15:05:24 by htavares         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static void draw_floor_ceiling(t_game *game)
 		y++;
 	}
 }
-/*Esta funcao esta completamente COPILOT, tenho que refazer e entender*/
+
 static void	draw_map(t_game *game)
 {
 	int			x;

@@ -6,7 +6,7 @@
 /*   By: htavares <htavares@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 15:51:07 by htavares          #+#    #+#             */
-/*   Updated: 2026/05/18 17:45:26 by htavares         ###   ########.fr       */
+/*   Updated: 2026/05/19 14:58:17 by htavares         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,11 @@
 # endif
 
 # ifndef STEPSPEED
-#  define STEPSPEED 0.12
+#  define STEPSPEED 0.04
 # endif
 
 # ifndef ROTATIONSPEED
-#  define ROTATIONSPEED 0.05
+#  define ROTATIONSPEED 0.02
 # endif
 
 # ifndef WINDOW_SIZE
@@ -113,6 +113,16 @@ typedef struct s_player
 	double	planeY;
 }	t_player;
 
+typedef struct s_input
+{
+	int	w;
+	int	s;
+	int	a;
+	int	d;
+	int	left;
+	int	right;
+}	t_input;
+
 typedef struct s_frame
 {
 	void	*img_mlx;
@@ -131,6 +141,7 @@ typedef struct s_game
 	t_frame		*frame;
 	double		*zbuffer;
 	t_player	player;
+	t_input		input;
 	s_file		*file;
 }   t_game;
 
@@ -189,7 +200,7 @@ void			cast_dda(t_game *game, t_rt_state *rt);
 void			calc_wall_height(t_game *game, t_rt_state *rt);
 void			draw_minimap(t_game *game);
 int				render(t_game *game);
-int				move_player(int keycode, t_game *game);
-int				look_player(int keycode, t_game *game);
+int				move_player(t_game *game);
+int				look_player(t_game *game);
 
 #endif
