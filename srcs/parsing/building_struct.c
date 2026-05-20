@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../../includes/cub3d.h"
 
 static char     *get_value(char *tmp)
 {
@@ -88,7 +88,7 @@ void    filling_struct_part3(char *tmp, s_file *file)
     
     i = 0;
     len = map_size(file->map);
-    new_map = malloc(sizeof(char *) * (len + 2));
+    new_map = calloc((len + 2), sizeof(char *));
     if (!new_map)
         exit_check(MALLOC_ERR, file);
     while (file->map && file->map[i])

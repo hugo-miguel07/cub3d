@@ -15,13 +15,13 @@ SRCS = srcs/main.c \
 		srcs/execution/textures.c \
 		srcs/execution/exec.c \
 		srcs/execution/mini_map.c \
-		srcs/parsing/parsing.c \
 		srcs/parsing/building_struct.c \
 		srcs/parsing/checking_file.c \
 		srcs/parsing/cubfile_check.c \
 		srcs/parsing/flood_fill.c \
 		srcs/parsing/map_parsing.c \
-		srcs/parsing/validating_coordinates.c \
+		srcs/parsing/parsing.c \
+		srcs/parsing/validating_coordinates.c
 
 OBJS = $(SRCS:.c=.o)
 
@@ -31,7 +31,7 @@ LIBFT = $(LIBFT_DIR)/libft.a
 MLX_DIR = minilibx
 MLX = $(MLX_DIR)/libmlx.a
 
-INCLUDES = -I./includes -I$(LIBFT_DIR) -I$(MLX_DIR)
+INCLUDES = -Iincludes -I$(LIBFT_DIR) -I$(MLX_DIR)
 
 %.o: %.c
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
