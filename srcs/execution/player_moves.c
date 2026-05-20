@@ -6,7 +6,7 @@
 /*   By: htavares <htavares@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/18 17:16:57 by htavares          #+#    #+#             */
-/*   Updated: 2026/05/19 14:58:01 by htavares         ###   ########.fr       */
+/*   Updated: 2026/05/20 14:29:48 by htavares         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	look_player(t_game *game)
 	plane_len = tan(FOV / 2.0);
 	game->player.planeX = -game->player.dirY * plane_len;
 	game->player.planeY = game->player.dirX * plane_len;
-    return (0);
+	return (0);
 }
 
 static int	move_frontback(t_game *g, double *nx, double *ny, double ss)
@@ -113,10 +113,10 @@ int	move_player(t_game *g)
 		moved = move_sideways(g, &nx, &ny, stepspeed);
 	if (!moved)
 		return (0);
-    if ((nx != g->player.px || ny != g->player.py) && canmove(g, nx, ny))
-    {
-        g->player.px = nx;
-        g->player.py = ny;
-    }
+	if ((nx != g->player.px || ny != g->player.py) && canmove(g, nx, ny))
+	{
+		g->player.px = nx;
+		g->player.py = ny;
+	}
 	return (0);
 }

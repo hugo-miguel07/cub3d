@@ -6,7 +6,7 @@
 /*   By: htavares <htavares@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/12 15:01:02 by htavares          #+#    #+#             */
-/*   Updated: 2026/05/19 16:43:51 by htavares         ###   ########.fr       */
+/*   Updated: 2026/05/20 14:23:48 by htavares         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,18 @@
 
 int	close_window(t_game *game)
 {
-    cleanup_game(game);
-    exit(0);
-    return (0);
+	cleanup_game(game);
+	exit(0);
+	return (0);
 }
 
 int	key_press(int keycode, t_game *game)
 {
 	if (keycode == 65307)
-    {
-        cleanup_game(game);
-        exit(0);
-    }
+	{
+		cleanup_game(game);
+		exit(0);
+	}
 	if (keycode == 119)
 		game->input.w = 1;
 	else if (keycode == 115)
@@ -71,8 +71,8 @@ int	render(t_game *game)
 
 void	game_loop(t_game *game)
 {
-	mlx_hook(game->win, 2, 1L<<0, (int (*)())key_press, game);
-	mlx_hook(game->win, 3, 1L<<1, (int (*)())key_release, game);
+	mlx_hook(game->win, 2, 1L << 0, (int (*)())key_press, game);
+	mlx_hook(game->win, 3, 1L << 1, (int (*)())key_release, game);
 	mlx_hook(game->win, 17, 0, (int (*)())close_window, game);
 	mlx_loop_hook(game->mlx, render, game);
 	mlx_loop(game->mlx);

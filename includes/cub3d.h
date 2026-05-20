@@ -6,7 +6,7 @@
 /*   By: htavares <htavares@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 15:51:07 by htavares          #+#    #+#             */
-/*   Updated: 2026/05/20 10:18:49 by htavares         ###   ########.fr       */
+/*   Updated: 2026/05/20 14:37:52 by htavares         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -199,14 +199,14 @@ typedef struct s_rt_state
 
 typedef struct s_minimap
 {
-	int		height;
-	int		width;
-	int		tile_size;
-	int		radius;
-	int		x_offset;
-	int		y_offset;
+	int				height;
+	int				width;
+	int				tile_size;
+	int				radius;
+	int				x_offset;
+	int				y_offset;
+	unsigned int	color;
 }	t_minimap;
-
 
 int				exec(s_file *file);
 void			cleanup_game(t_game *game);
@@ -226,5 +226,11 @@ void			draw_minimap(t_game *game);
 int				render(t_game *game);
 int				move_player(t_game *game);
 int				look_player(t_game *game);
+void			init_dda_params(t_game *game, t_rt_state *rt
+					, double *px, double *py);
+void			init_steps(t_rt_state *rt, double px, double py);
+int				is_outside_map(t_game *game, t_rt_state *rt);
+void			draw_map(t_game *game);
+unsigned int	get_texel(t_texture *tex, int x, int y);
 
 #endif

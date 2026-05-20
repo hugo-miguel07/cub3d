@@ -6,7 +6,7 @@
 /*   By: htavares <htavares@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/12 12:30:55 by htavares          #+#    #+#             */
-/*   Updated: 2026/05/19 15:04:25 by htavares         ###   ########.fr       */
+/*   Updated: 2026/05/20 14:20:24 by htavares         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	find_player(t_game *game)
 	int		x;
 	int		y;
 	char	**map;
-	
+
 	if (!game)
 		return ;
 	map = game->file->map;

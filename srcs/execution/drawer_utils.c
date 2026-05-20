@@ -6,11 +6,25 @@
 /*   By: htavares <htavares@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/12 17:09:41 by htavares          #+#    #+#             */
-/*   Updated: 2026/05/12 17:32:48 by htavares         ###   ########.fr       */
+/*   Updated: 2026/05/20 14:37:42 by htavares         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+unsigned int	get_texel(t_texture *tex, int x, int y)
+{
+	char	*dst;
+	int		offset;
+
+	if (!tex || !tex->pixels)
+		return (0);
+	if (x < 0 || y < 0 || x >= tex->width || y >= tex->height)
+		return (0);
+	offset = (y * tex->line_length) + (x * (tex->bits_per_pix / 8));
+	dst = (char *)tex->pixels + offset;
+	return (*(unsigned int *)dst);
+}
 
 void	put_pixel(t_frame *f, int x, int y, unsigned int color)
 {

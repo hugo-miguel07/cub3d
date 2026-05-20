@@ -6,7 +6,7 @@
 /*   By: htavares <htavares@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/12 12:09:35 by htavares          #+#    #+#             */
-/*   Updated: 2026/05/19 15:02:59 by htavares         ###   ########.fr       */
+/*   Updated: 2026/05/20 14:20:09 by htavares         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,22 @@ static void	free_arr_exec(char **arr)
 	arr = NULL;
 }
 
+static void	free_pair(char *pair[2])
+{
+	if (!pair)
+		return ;
+	if (pair[0])
+	{
+		free(pair[0]);
+		pair[0] = NULL;
+	}
+	if (pair[1])
+	{
+		free(pair[1]);
+		pair[1] = NULL;
+	}
+}
+
 static void	cleanup_frame(t_game *game)
 {
 	if (!game || !game->frame)
@@ -44,18 +60,12 @@ void	cleanup_file(s_file *file)
 		return ;
 	if (file->map)
 		free_arr_exec(file->map);
-	if (file->C_color)
-		free_arr_exec(file->C_color);
-	if (file->F_color)
-		free_arr_exec(file->F_color);
-	if (file->NO_texture)
-		free_arr_exec(file->NO_texture);
-	if (file->WE_texture)
-		free_arr_exec(file->WE_texture);
-	if (file->SO_texture)
-		free_arr_exec(file->SO_texture);
-	if (file->EA_texture)
-		free_arr_exec(file->EA_texture);
+	free_pair(file->C_color);
+	free_pair(file->F_color);
+	free_pair(file->NO_texture);
+	free_pair(file->WE_texture);
+	free_pair(file->SO_texture);
+	free_pair(file->EA_texture);
 }
 
 void	cleanup_game(t_game *game)
@@ -63,27 +73,22 @@ void	cleanup_game(t_game *game)
 	if (!game)
 		return ;
 	if (game->zbuffer)
-	{
 		free(game->zbuffer);
-		game->zbuffer = NULL;
-	}
 	if (game->frame)
-	{
 		cleanup_frame(game);
-		game->frame = NULL;
-	}
 	destroy_textures(game);
 	if (game->win)
-	{
 		mlx_destroy_window(game->mlx, game->win);
-		game->win = NULL;
-	}
 	if (game->mlx)
 	{
 		mlx_destroy_display(game->mlx);
 		free(game->mlx);
-		game->mlx = NULL;
 	}
 	if (game->file)
 		cleanup_file(game->file);
+	game->zbuffer = NULL;
+	game->frame = NULL;
+	game->win = NULL;
+	game->mlx = NULL;
+	game->file = NULL;
 }
