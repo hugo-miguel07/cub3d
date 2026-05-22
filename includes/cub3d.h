@@ -6,7 +6,7 @@
 /*   By: antabord <antabord@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 15:51:07 by htavares          #+#    #+#             */
-/*   Updated: 2026/05/21 18:17:59 by antabord         ###   ########.fr       */
+/*   Updated: 2026/05/22 12:55:39 by antabord         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,59 +49,60 @@
 
 /***************************Parsing******************************* */
 
-enum				exit_code
+enum				e_exit_code
 {
-	MALLOC_ERR,
-	INVALID_NUMBER_ARGS,
-	FILE_DOENST_EXIST,
-	NO_READING_PERM,
-	NON_PRINTABLE_CHARS,
-	INVALID_TYPE_FILE,
-	EMPTY_FILE,
-	INVALID_ID,
-	INVALID_NOTEXTURE_PATH,
-	INVALID_SOTEXTURE_PATH,
-	INVALID_EATEXTURE_PATH,
-	INVALID_WETEXTURE_PATH,
-	INVALID_COLOR_COORDINATES,
-	EMPTY_LINE_INSIDE_MAP,
-	INVALID_MAP_CHAR,
-	INVALID_WALLS,
-	INVALID_PLAYER_SPAWN,
+	malloc_err,
+	invalid_number_args,
+	file_doesnt_exist,
+	invalid_file,
+	non_printable_chars,
+	invalid_type_file,
+	empty_file,
+	invalid_id,
+	invalid_notexture_path,
+	invalid_sotexture_path,
+	invalid_eatexture_path,
+	invalid_wetexture_path,
+	inavlid_colo_coordinates,
+	empty_line_inside_map,
+	invalid_map_char,
+	invalid_walls,
+	invalid_spawn,
 };
 
-typedef struct t_file
+typedef struct s_file
 {
-	char			*NO_texture[2];
-	char			*SO_texture[2];
-	char			*WE_texture[2];
-	char			*EA_texture[2];
-	char			*F_color[2];
-	char			*C_color[2];
+	char			*no_texture[2];
+	char			*so_texture[2];
+	char			*we_texture[2];
+	char			*ea_texture[2];
+	char			*f_color[2];
+	char			*c_color[2];
 	char			**map;
 	int				player;
 	int				fill_counter;
-}					s_file;
+}					t_file;
 
-void				exit_check(enum exit_code code, s_file *file);
+void				exit_check(enum e_exit_code code, t_file *file);
 /*tem que aceitar os args daquilo que s tem que libertar*/
-int				free_arr(char **arr, int index);
-void				cleanup(s_file *file);
+int					free_arr(char **arr, int index);
+void				cleanup(t_file *file);
 
-s_file				parsing(s_file *file, char **av);
-int					checking_file(int fd, s_file *file);
+t_file				parsing(t_file *file, char **av);
+int					checking_file(int fd, t_file *file);
 int					checking_cubfile(char *av);
-void				filling_struct_part1(char *tmp, char *id, s_file *file);
-void				filling_struct_part3(char *tmp, s_file *file);
-int				checking_rgb(s_file *files);
-int				checking_paths(s_file *file);
-int				checking_chars_n_walls(s_file *file, char **map);
+void				filling_struct_part1(char *tmp, char *id, t_file *file);
+void				filling_struct_part3(char *tmp, t_file *file);
+int					checking_rgb(t_file *files);
+int					checking_paths(t_file *file);
+int					checking_chars_n_walls(t_file *file, char **map);
 void				skip_spaces(char **ptr);
 int					map_size(char **map);
-int				map_cpy(s_file *file);
-int				player_pos(s_file *file, char **cpy);
-int				flood_fill(s_file *file, char **map, int y, int x);
-void				exit_check(enum exit_code code, s_file *file);
+int					map_cpy(t_file *file);
+int					player_pos(t_file *file, char **cpy);
+int					flood_fill(t_file *file, char **map, int y, int x);
+void				exit_check(enum e_exit_code code, t_file *file);
+int					texture_validation(t_file *file);
 
 /*--------------------Execution------------------------*/
 
@@ -110,10 +111,10 @@ typedef struct s_player
 	double			px;
 	double			py;
 	double			angle;
-	double			dirX;
-	double			dirY;
-	double			planeX;
-	double			planeY;
+	double			dirx;
+	double			diry;
+	double			planex;
+	double			planey;
 }					t_player;
 
 typedef struct s_input
@@ -165,35 +166,35 @@ typedef struct s_game
 	t_textures		textures;
 	t_player		player;
 	t_input			input;
-	s_file			*file;
+	t_file			*file;
 }					t_game;
 
 typedef struct s_rt_state
 {
 	// DDA stepping
-	int				mapX;
-	int				mapY;
-	int				stepX;
-	int				stepY;
-	double			deltaDistX;
-	double			deltaDistY;
-	double			sideDistX;
-	double			sideDistY;
+	int				mapx;
+	int				mapy;
+	int				stepx;
+	int				stepy;
+	double			deltadistx;
+	double			deltadisty;
+	double			sidedistx;
+	double			sidedisty;
 
 	// Ray data
-	double			rayDirX;
-	double			rayDirY;
-	double			cameraX;
+	double			raydirx;
+	double			raydiry;
+	double			camerax;
 
 	// Results
 	int				side;
 	int				hit;
-	double			perpWallDist;
+	double			perpwalldist;
 
 	// Wall rendering
-	int				lineHeight;
-	int				drawStart;
-	int				drawEnd;
+	int				lineheight;
+	int				drawstart;
+	int				drawend;
 	unsigned int	color;
 	t_texture		*tex;
 }					t_rt_state;
@@ -209,7 +210,7 @@ typedef struct s_minimap
 	unsigned int	color;
 }					t_minimap;
 
-int					exec(s_file *file);
+int					exec(t_file *file);
 void				cleanup_game(t_game *game);
 void				find_player(t_game *game);
 int					create_frame(t_game *game);

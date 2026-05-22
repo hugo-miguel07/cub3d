@@ -29,7 +29,7 @@ Isto repete para todas as colunas, criando a ilusao de 3D.
 ## As estruturas importantes (traducoes simples)
 
 - `t_game`: o mundo todo (janela, frame, mapa, texturas, jogador).
-- `t_player`: posicao do jogador (`px`, `py`) e direcao (`dirX`, `dirY`).
+- `t_player`: posicao do jogador (`px`, `py`) e direcao (`dirx`, `diry`).
 - `t_rt_state`: o estado temporario de UM raio. Tudo o que e preciso para desenhar UMA coluna.
 - `t_texture`: uma imagem de parede (pixels + tamanho).
 
@@ -80,13 +80,13 @@ Em [srcs/execution/raycasting.c](srcs/execution/raycasting.c), `init_ray()` faz:
 1. Converte a coluna `x` para o intervalo de camera $[-1, 1]$:
 
 $$
-\text{cameraX} = 2 \cdot x / \text{screenWidth} - 1
+\text{camerax} = 2 \cdot x / \text{screenWidth} - 1
 $$
 
 2. Mistura a direcao do jogador com o plano da camera:
 
 $$
-\text{rayDir} = \text{dir} + \text{plane} \cdot \text{cameraX}
+\text{rayDir} = \text{dir} + \text{plane} \cdot \text{camerax}
 $$
 
 Isto cria um leque de raios: os do centro seguem a direcao do jogador, os das laterais abrem para a esquerda/direita.
@@ -105,33 +105,33 @@ O mapa e um grid de blocos. O DDA (Digital Differential Analyzer) avanca quadrad
 
 Em [srcs/execution/raycasting_utils.c](srcs/execution/raycasting_utils.c):
 
-- `mapX` e `mapY` sao a celula atual do jogador (parte inteira de `px`, `py`).
-- `deltaDistX` e `deltaDistY` dizem quanto o raio anda para atravessar uma linha vertical ou horizontal do grid.
+- `mapx` e `mapy` sao a celula atual do jogador (parte inteira de `px`, `py`).
+- `deltadistx` e `deltadisty` dizem quanto o raio anda para atravessar uma linha vertical ou horizontal do grid.
 
 Formula (intuitiva):
 
 $$
-\text{deltaDistX} = |1 / \text{rayDirX}| \quad\quad \text{deltaDistY} = |1 / \text{rayDirY}|
+\text{deltadistx} = |1 / \text{raydirx}| \quad\quad \text{deltadisty} = |1 / \text{raydiry}|
 $$
 
-Se `rayDirX` ou `rayDirY` forem 0, usa-se um numero enorme (1e30) para evitar divisao por zero.
+Se `raydirx` ou `raydiry` forem 0, usa-se um numero enorme (1e30) para evitar divisao por zero.
 
 ### 2.2 `init_steps()` - escolher para que lado andar
 
 Aqui define-se:
 
-- `stepX` = +1 se o raio vai para a direita, -1 se vai para a esquerda.
-- `stepY` = +1 se o raio vai para baixo, -1 se vai para cima.
+- `stepx` = +1 se o raio vai para a direita, -1 se vai para a esquerda.
+- `stepy` = +1 se o raio vai para baixo, -1 se vai para cima.
 
-E calcula-se `sideDistX` e `sideDistY`: a distancia ate a proxima linha vertical/horizontal do grid.
+E calcula-se `sidedistx` e `sidedisty`: a distancia ate a proxima linha vertical/horizontal do grid.
 
 ### 2.3 `run_dda_loop()` - o loop de passos no grid
 
 Em [srcs/execution/raycasting.c](srcs/execution/raycasting.c):
 
-- Compara `sideDistX` e `sideDistY`.
+- Compara `sidedistx` e `sidedisty`.
 - Avanca na menor (isto significa bater primeiro numa linha vertical ou horizontal).
-- Atualiza `mapX` ou `mapY`.
+- Atualiza `mapx` ou `mapy`.
 - Verifica se saiu do mapa ou se encontrou parede `'1'`.
 
 No fim, `rt->side` indica o tipo de parede:
@@ -145,9 +145,9 @@ A distancia usada para desenhar nao e a distancia do raio direto, mas a distanci
 
 ```
 if side == 0:
-  perpWallDist = sideDistX - deltaDistX
+  perpwalldist = sidedistx - deltadistx
 else:
-  perpWallDist = sideDistY - deltaDistY
+  perpwalldist = sidedisty - deltadisty
 ```
 
 Se ficar <= 0, usa-se um valor muito grande para evitar bugs.
@@ -159,10 +159,10 @@ Em [srcs/execution/raycasting.c](srcs/execution/raycasting.c):
 - A altura da parede no ecran e inversamente proporcional a distancia:
 
 $$
-\text{lineHeight} = \text{screenHeight} / \text{perpWallDist}
+\text{lineheight} = \text{screenHeight} / \text{perpwalldist}
 $$
 
-- `drawStart` e `drawEnd` limitam a coluna ao centro do ecran.
+- `drawstart` e `drawend` limitam a coluna ao centro do ecran.
 
 Isto faz paredes perto parecerem grandes e paredes longe pequenas.
 
@@ -171,12 +171,12 @@ Isto faz paredes perto parecerem grandes e paredes longe pequenas.
 Em [srcs/execution/drawmap.c](srcs/execution/drawmap.c), `select_texture()`:
 
 - Se `side == 0` (vertical):
-  - `rayDirX < 0` -> textura Oeste (`WE`)
-  - `rayDirX >= 0` -> textura Este (`EA`)
+  - `raydirx < 0` -> textura Oeste (`WE`)
+  - `raydirx >= 0` -> textura Este (`EA`)
 
 - Se `side == 1` (horizontal):
-  - `rayDirY < 0` -> textura Norte (`NO`)
-  - `rayDirY >= 0` -> textura Sul (`SO`)
+  - `raydiry < 0` -> textura Norte (`NO`)
+  - `raydiry >= 0` -> textura Sul (`SO`)
 
 Isto garante que cada parede tem a textura correta.
 
@@ -197,14 +197,14 @@ Depois faz um espelho dependendo do lado, para a textura nao ficar invertida.
 - `step`: quanto se deve andar na textura por cada pixel do ecran.
 
 $$
-\text{step} = \text{texHeight} / \text{lineHeight}
+\text{step} = \text{texHeight} / \text{lineheight}
 $$
 
 - `tex_pos`: posicao inicial na textura.
 
 ### 5.3 Loop vertical da coluna
 
-Para cada `y` entre `drawStart` e `drawEnd`:
+Para cada `y` entre `drawstart` e `drawend`:
 
 - Converte `tex_pos` num `y` da textura.
 - Vai buscar a cor com `get_texel()`.
@@ -217,7 +217,7 @@ Resultado: uma coluna texturada que representa uma parede 3D.
 
 Em `prep_ray()`:
 
-- Guarda-se `perpWallDist` em `game->zbuffer[x]`.
+- Guarda-se `perpwalldist` em `game->zbuffer[x]`.
 
 Isto serve para outras coisas (por exemplo sprites) saberem se estao atras de uma parede.
 
@@ -234,14 +234,14 @@ Isto serve para outras coisas (por exemplo sprites) saberem se estao atras de um
 Supondo que estas no meio do mapa e a parede esta a 3 blocos:
 
 - O raio anda 3 quadrados.
-- `perpWallDist = 3`.
-- `lineHeight = screenHeight / 3`.
+- `perpwalldist = 3`.
+- `lineheight = screenHeight / 3`.
 - A coluna aparece com 1/3 da altura do ecran.
 
 Se a parede estiver a 1 bloco:
 
-- `perpWallDist = 1`.
-- `lineHeight = screenHeight / 1` (quase altura total).
+- `perpwalldist = 1`.
+- `lineheight = screenHeight / 1` (quase altura total).
 
 ## Pseudocodigo (forma curta)
 
@@ -275,7 +275,7 @@ for x in [0..screenWidth-1]:
 Tenta responder isto sem olhar no codigo:
 
 - Como se calcula a direcao de um raio a partir de `x`?
-- Porque usamos `perpWallDist` e nao a distancia real do raio?
+- Porque usamos `perpwalldist` e nao a distancia real do raio?
 - Como o DDA decide se avanca no X ou no Y?
 - Como escolhes a textura correta da parede?
 - Como transformas a altura da parede em pixeis na tela?

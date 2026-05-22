@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: htavares <htavares@student.42.fr>          +#+  +:+       +#+        */
+/*   By: antabord <antabord@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 15:57:19 by htavares          #+#    #+#             */
-/*   Updated: 2026/05/19 17:08:42 by htavares         ###   ########.fr       */
+/*   Updated: 2026/05/22 12:38:40 by antabord         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void	game_init(t_game *game, s_file *file)
+static void	game_init(t_game *game, t_file *file)
 {
 	game->mlx = NULL;
 	game->win = NULL;
@@ -20,10 +20,10 @@ static void	game_init(t_game *game, s_file *file)
 	game->player.px = -1.0;
 	game->player.py = -1.0;
 	game->player.angle = 0.0;
-	game->player.dirX = 0.0;
-	game->player.dirY = 0.0;
-	game->player.planeX = 0.0;
-	game->player.planeY = 0.0;
+	game->player.dirx = 0.0;
+	game->player.diry = 0.0;
+	game->player.planex = 0.0;
+	game->player.planey = 0.0;
 	game->input.w = 0;
 	game->input.s = 0;
 	game->input.a = 0;
@@ -47,7 +47,7 @@ static int	start_mlx(t_game *game)
 	return (1);
 }
 
-int	exec(s_file *file)
+int	exec(t_file *file)
 {
 	t_game	game;
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player_moves.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: htavares <htavares@student.42.fr>          +#+  +:+       +#+        */
+/*   By: antabord <antabord@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/18 17:16:57 by htavares          #+#    #+#             */
-/*   Updated: 2026/05/20 14:29:48 by htavares         ###   ########.fr       */
+/*   Updated: 2026/05/22 12:39:01 by antabord         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,11 @@ int	look_player(t_game *game)
 	}
 	if (!rotated)
 		return (0);
-	game->player.dirX = cos(game->player.angle);
-	game->player.dirY = sin(game->player.angle);
+	game->player.dirx = cos(game->player.angle);
+	game->player.diry = sin(game->player.angle);
 	plane_len = tan(FOV / 2.0);
-	game->player.planeX = -game->player.dirY * plane_len;
-	game->player.planeY = game->player.dirX * plane_len;
+	game->player.planex = -game->player.diry * plane_len;
+	game->player.planey = game->player.dirx * plane_len;
 	return (0);
 }
 
@@ -63,14 +63,14 @@ static int	move_frontback(t_game *g, double *nx, double *ny, double ss)
 	moved = 0;
 	if (g->input.w)
 	{
-		*ny += g->player.dirY * ss;
-		*nx += g->player.dirX * ss;
+		*ny += g->player.diry * ss;
+		*nx += g->player.dirx * ss;
 		moved = 1;
 	}
 	else if (g->input.s)
 	{
-		*ny -= g->player.dirY * ss;
-		*nx -= g->player.dirX * ss;
+		*ny -= g->player.diry * ss;
+		*nx -= g->player.dirx * ss;
 		moved = 1;
 	}
 	return (moved);
@@ -83,14 +83,14 @@ static int	move_sideways(t_game *g, double *nx, double *ny, double ss)
 	moved = 0;
 	if (g->input.a)
 	{
-		*ny += g->player.dirX * ss;
-		*nx += -g->player.dirY * ss;
+		*ny += g->player.dirx * ss;
+		*nx += -g->player.diry * ss;
 		moved = 1;
 	}
 	else if (g->input.d)
 	{
-		*ny -= g->player.dirX * ss;
-		*nx -= -g->player.dirY * ss;
+		*ny -= g->player.dirx * ss;
+		*nx -= -g->player.diry * ss;
 		moved = 1;
 	}
 	return (moved);

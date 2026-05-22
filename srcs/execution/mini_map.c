@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: htavares <htavares@student.42.fr>          +#+  +:+       +#+        */
+/*   By: antabord <antabord@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/20 10:28:18 by htavares          #+#    #+#             */
-/*   Updated: 2026/05/20 14:40:02 by htavares         ###   ########.fr       */
+/*   Updated: 2026/05/22 12:51:34 by antabord         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ static void	coloring_minimap(t_frame *frame, int start_x
 	int	y;
 
 	if (!frame || mm->tile_size <= 0)
+		return ;
+	if (mm->color == 0x00000000)
 		return ;
 	y = 0;
 	while (y < mm->tile_size)

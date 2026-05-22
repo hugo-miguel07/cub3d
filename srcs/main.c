@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: htavares <htavares@student.42.fr>          +#+  +:+       +#+        */
+/*   By: antabord <antabord@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 15:35:00 by htavares          #+#    #+#             */
-/*   Updated: 2026/05/20 12:08:03 by htavares         ###   ########.fr       */
+/*   Updated: 2026/05/22 12:28:41 by antabord         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 int	main(int ac, char **av)
 {
-	s_file file;
-	
+	t_file	file;
+
 	if (ac != 2)
-		exit_check(INVALID_NUMBER_ARGS, NULL);
+		return (exit_check(invalid_number_args, NULL), 1);
 	ft_memset(&file, 0, sizeof(file));
 	file = parsing(&file, av);
 	if (!exec(&file))

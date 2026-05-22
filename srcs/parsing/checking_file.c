@@ -6,11 +6,32 @@
 /*   By: antabord <antabord@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/20 13:25:43 by antabord          #+#    #+#             */
-/*   Updated: 2026/05/21 18:00:06 by antabord         ###   ########.fr       */
+/*   Updated: 2026/05/22 13:00:58 by antabord         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
+
+int	texture_validation(t_file *file)
+{
+	if (ft_strlen(file->no_texture[1]) <= 5 || !ft_strrchr(file->no_texture[1],
+			'.') || ft_strncmp(ft_strrchr(file->no_texture[1], '.'), ".xpm",
+			5) != 0)
+		return (exit_check(invalid_notexture_path, file), 0);
+	if (ft_strlen(file->so_texture[1]) <= 5 || !ft_strrchr(file->so_texture[1],
+			'.') || ft_strncmp(ft_strrchr(file->so_texture[1], '.'), ".xpm",
+			5) != 0)
+		return (exit_check(invalid_sotexture_path, file), 0);
+	if (ft_strlen(file->we_texture[1]) <= 5 || !ft_strrchr(file->we_texture[1],
+			'.') || ft_strncmp(ft_strrchr(file->we_texture[1], '.'), ".xpm",
+			5) != 0)
+		return (exit_check(invalid_wetexture_path, file), 0);
+	if (ft_strlen(file->ea_texture[1]) <= 5 || !ft_strrchr(file->ea_texture[1],
+			'.') || ft_strncmp(ft_strrchr(file->ea_texture[1], '.'), ".xpm",
+			5) != 0)
+		return (exit_check(invalid_eatexture_path, file), 0);
+	return (1);
+}
 
 static char	*get_line_update_buffer(char *tmp, char *buffer)
 {
@@ -29,7 +50,7 @@ static char	*get_line_update_buffer(char *tmp, char *buffer)
 	return (tmp);
 }
 
-static int	getting_id(char *tmp, s_file *file)
+static int	getting_id(char *tmp, t_file *file)
 {
 	char	id[3];
 
@@ -86,7 +107,7 @@ static char	*reading_file(int fd)
 	return (get_line_update_buffer(tmp, buffer));
 }
 
-int	checking_file(int fd, s_file *file)
+int	checking_file(int fd, t_file *file)
 {
 	char	*raw;
 	char	*trim;
@@ -105,7 +126,7 @@ int	checking_file(int fd, s_file *file)
 				continue ;
 			}
 			if (getting_id(trim, file) < 0)
-				return (free(raw), exit_check(INVALID_ID, file), 0);
+				return (free(raw), exit_check(invalid_id, file), 0);
 		}
 		else
 			filling_struct_part3(raw, file);

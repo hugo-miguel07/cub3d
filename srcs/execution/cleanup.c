@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cleanup.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: htavares <htavares@student.42.fr>          +#+  +:+       +#+        */
+/*   By: antabord <antabord@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/12 12:09:35 by htavares          #+#    #+#             */
-/*   Updated: 2026/05/20 14:20:09 by htavares         ###   ########.fr       */
+/*   Updated: 2026/05/22 12:28:41 by antabord         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,18 +54,18 @@ static void	cleanup_frame(t_game *game)
 	free(game->frame);
 }
 
-void	cleanup_file(s_file *file)
+void	cleanup_file(t_file *file)
 {
 	if (!file)
 		return ;
 	if (file->map)
 		free_arr_exec(file->map);
-	free_pair(file->C_color);
-	free_pair(file->F_color);
-	free_pair(file->NO_texture);
-	free_pair(file->WE_texture);
-	free_pair(file->SO_texture);
-	free_pair(file->EA_texture);
+	free_pair(file->c_color);
+	free_pair(file->f_color);
+	free_pair(file->no_texture);
+	free_pair(file->we_texture);
+	free_pair(file->so_texture);
+	free_pair(file->ea_texture);
 }
 
 void	cleanup_game(t_game *game)

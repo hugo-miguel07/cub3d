@@ -6,7 +6,7 @@
 /*   By: antabord <antabord@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/20 17:26:23 by antabord          #+#    #+#             */
-/*   Updated: 2026/05/21 17:35:28 by antabord         ###   ########.fr       */
+/*   Updated: 2026/05/22 12:28:41 by antabord         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,49 +19,49 @@ static char	*get_value(char *tmp)
 	return (tmp);
 }
 
-static void	filling_struct_part2(char *tmp, char *id, s_file *file)
+static void	filling_struct_part2(char *tmp, char *id, t_file *file)
 {
 	if (!ft_strncmp(id, "EA", 2) && id[2] == '\0')
 	{
-		file->EA_texture[0] = ft_strdup(id);
-		file->EA_texture[1] = ft_strdup(get_value(tmp));
+		file->ea_texture[0] = ft_strdup(id);
+		file->ea_texture[1] = ft_strdup(get_value(tmp));
 		file->fill_counter++;
 	}
 	else if (!ft_strncmp(id, "F", 1) && id[1] == '\0')
 	{
-		file->F_color[0] = ft_strdup(id);
-		file->F_color[1] = ft_strdup(get_value(tmp));
+		file->f_color[0] = ft_strdup(id);
+		file->f_color[1] = ft_strdup(get_value(tmp));
 		file->fill_counter++;
 	}
 	else if (!ft_strncmp(id, "C", 1) && id[1] == '\0')
 	{
-		file->C_color[0] = ft_strdup(id);
-		file->C_color[1] = ft_strdup(get_value(tmp));
+		file->c_color[0] = ft_strdup(id);
+		file->c_color[1] = ft_strdup(get_value(tmp));
 		file->fill_counter++;
 	}
 	else
 		return ;
 }
 
-void	filling_struct_part1(char *tmp, char *id, s_file *file)
+void	filling_struct_part1(char *tmp, char *id, t_file *file)
 {
 	skip_spaces(&tmp);
 	if (!ft_strncmp(id, "NO", 2) && id[2] == '\0')
 	{
-		file->NO_texture[0] = ft_strdup(id);
-		file->NO_texture[1] = ft_strdup(get_value(tmp));
+		file->no_texture[0] = ft_strdup(id);
+		file->no_texture[1] = ft_strdup(get_value(tmp));
 		file->fill_counter++;
 	}
 	else if (!ft_strncmp(id, "SO", 2) && id[2] == '\0')
 	{
-		file->SO_texture[0] = ft_strdup(id);
-		file->SO_texture[1] = ft_strdup(get_value(tmp));
+		file->so_texture[0] = ft_strdup(id);
+		file->so_texture[1] = ft_strdup(get_value(tmp));
 		file->fill_counter++;
 	}
 	else if (!ft_strncmp(id, "WE", 2) && id[2] == '\0')
 	{
-		file->WE_texture[0] = ft_strdup(id);
-		file->WE_texture[1] = ft_strdup(get_value(tmp));
+		file->we_texture[0] = ft_strdup(id);
+		file->we_texture[1] = ft_strdup(get_value(tmp));
 		file->fill_counter++;
 	}
 	else
@@ -80,7 +80,7 @@ int	map_size(char **map)
 	return (i);
 }
 
-void	filling_struct_part3(char *tmp, s_file *file)
+void	filling_struct_part3(char *tmp, t_file *file)
 {
 	int		len;
 	int		i;
@@ -90,7 +90,7 @@ void	filling_struct_part3(char *tmp, s_file *file)
 	len = map_size(file->map);
 	new_map = calloc((len + 2), sizeof(char *));
 	if (!new_map)
-		exit_check(MALLOC_ERR, file);
+		exit_check(malloc_err, file);
 	while (file->map && file->map[i])
 	{
 		new_map[i] = file->map[i];
@@ -100,7 +100,7 @@ void	filling_struct_part3(char *tmp, s_file *file)
 	if (!new_map[i])
 	{
 		free(new_map);
-		exit_check(MALLOC_ERR, file);
+		exit_check(malloc_err, file);
 	}
 	new_map[i + 1] = NULL;
 	free(file->map);
