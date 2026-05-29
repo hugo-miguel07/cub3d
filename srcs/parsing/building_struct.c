@@ -106,3 +106,4 @@ void	filling_struct_part3(char *tmp, t_file *file)
 	free(file->map);
 	file->map = new_map;
 }
+

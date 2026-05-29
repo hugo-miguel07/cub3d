@@ -68,6 +68,7 @@ enum				e_exit_code
 	invalid_map_char,
 	invalid_walls,
 	invalid_spawn,
+	invalid_map_size,
 };
 
 typedef struct s_file

@@ -1,10 +1,10 @@
-NO /home/htavares/COMMONCORE/rank04/cub3d/imgs/Wall1.xpm
-SO                     /home/htavares/COMMONCORE/rank04/cub3d/imgs/Wall2.xpm
+NO imgs/Wall1.xpm
+SO                     imgs/Wall2.xpm
 
 
 
-WE /home/htavares/COMMONCORE/rank04/cub3d/imgs/Wall3.xpm
-EA /home/htavares/COMMONCORE/rank04/cub3d/imgs/Wall4.xpm
+WE imgs/Wall3.xpm
+EA imgs/Wall4.xpm
 
 
 
@@ -34,4 +34,7 @@ C 135,206,235
 
 111
 1N1
+111
+
+111
 111
