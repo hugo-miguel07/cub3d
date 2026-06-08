@@ -6,7 +6,7 @@
 /*   By: htavares <htavares@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 15:51:07 by htavares          #+#    #+#             */
-/*   Updated: 2026/05/20 14:37:52 by htavares         ###   ########.fr       */
+/*   Updated: 2026/06/08 18:15:48 by htavares         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,10 @@
 
 # ifndef ROTATIONSPEED
 #  define ROTATIONSPEED 0.02
+# endif
+
+# ifndef PLAYERCOLLISION
+#  define PLAYERCOLLISION 0.05
 # endif
 
 # ifndef WINDOW_SIZE
@@ -232,5 +236,10 @@ void			init_steps(t_rt_state *rt, double px, double py);
 int				is_outside_map(t_game *game, t_rt_state *rt);
 void			draw_map(t_game *game);
 unsigned int	get_texel(t_texture *tex, int x, int y);
+int				is_wall(t_game *game, int x, int y);
+int				check_x_padding(t_game *game, int mx, int my,
+					double nx, double p);
+int				check_y_padding(t_game *game, int mx, int my,
+					double ny, double p);
 
 #endif

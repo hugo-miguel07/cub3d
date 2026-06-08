@@ -6,26 +6,32 @@
 /*   By: htavares <htavares@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/18 17:16:57 by htavares          #+#    #+#             */
-/*   Updated: 2026/05/20 14:29:48 by htavares         ###   ########.fr       */
+/*   Updated: 2026/06/08 18:15:18 by htavares         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+
+
 static int	canmove(t_game *game, double nx, double ny)
 {
-	int	mx;
-	int	my;
+	int     mx;
+	int     my;
+	double  p;
 
 	if (!game || !game->file || !game->file->map)
 		return (0);
 	mx = (int)nx;
 	my = (int)ny;
-	if (my < 0 || !game->file->map[my])
+	if (is_wall(game, mx, my))
 		return (0);
-	if (mx < 0 || !game->file->map[my][mx])
+	p = PLAYERCOLLISION;
+	if (!check_x_padding(game, mx, my, nx, p))
 		return (0);
-	return (game->file->map[my][mx] != '1');
+	if (!check_y_padding(game, mx, my, ny, p))
+		return (0);
+	return (1);
 }
 
 int	look_player(t_game *game)
