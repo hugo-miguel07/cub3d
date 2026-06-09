@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: htavares <htavares@student.42.fr>          +#+  +:+       +#+        */
+/*   By: antabord <antabord@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/12 12:30:55 by htavares          #+#    #+#             */
-/*   Updated: 2026/05/20 14:20:24 by htavares         ###   ########.fr       */
+/*   Updated: 2026/05/22 12:38:55 by antabord         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,11 @@ static void	set_playerangle(t_game *game, char look)
 		game->player.angle = M_PI;
 	else if (look == 'N')
 		game->player.angle = 3 * M_PI / 2;
-	game->player.dirX = cos(game->player.angle);
-	game->player.dirY = sin(game->player.angle);
+	game->player.dirx = cos(game->player.angle);
+	game->player.diry = sin(game->player.angle);
 	plane_len = tan(FOV / 2.0);
-	game->player.planeX = -game->player.dirY * plane_len;
-	game->player.planeY = game->player.dirX * plane_len;
+	game->player.planex = -game->player.diry * plane_len;
+	game->player.planey = game->player.dirx * plane_len;
 }
 
 void	find_player(t_game *game)

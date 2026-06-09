@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   textures.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: htavares <htavares@student.42.fr>          +#+  +:+       +#+        */
+/*   By: antabord <antabord@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 17:02:00 by htavares          #+#    #+#             */
-/*   Updated: 2026/05/19 17:17:41 by htavares         ###   ########.fr       */
+/*   Updated: 2026/05/22 12:26:43 by antabord         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,13 @@ int	load_textures(t_game *game)
 {
 	if (!game || !game->file)
 		return (0);
-	if (!load_texture(game, &game->textures.no, game->file->NO_texture[1]))
+	if (!load_texture(game, &game->textures.no, game->file->no_texture[1]))
 		return (0);
-	if (!load_texture(game, &game->textures.so, game->file->SO_texture[1]))
+	if (!load_texture(game, &game->textures.so, game->file->so_texture[1]))
 		return (destroy_textures(game), 0);
-	if (!load_texture(game, &game->textures.we, game->file->WE_texture[1]))
+	if (!load_texture(game, &game->textures.we, game->file->we_texture[1]))
 		return (destroy_textures(game), 0);
-	if (!load_texture(game, &game->textures.ea, game->file->EA_texture[1]))
+	if (!load_texture(game, &game->textures.ea, game->file->ea_texture[1]))
 		return (destroy_textures(game), 0);
 	return (1);
 }

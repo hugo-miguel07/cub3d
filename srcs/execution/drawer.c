@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   drawer.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: htavares <htavares@student.42.fr>          +#+  +:+       +#+        */
+/*   By: antabord <antabord@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/12 15:30:23 by htavares          #+#    #+#             */
-/*   Updated: 2026/05/20 14:38:30 by htavares         ###   ########.fr       */
+/*   Updated: 2026/05/22 12:27:11 by antabord         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ static void	draw_floor_ceiling(t_game *game)
 	unsigned int	ceil_c;
 	unsigned int	floor_c;
 
-	ceil_c = parse_rgb(game->file->C_color[1]);
-	floor_c = parse_rgb(game->file->F_color[1]);
+	ceil_c = parse_rgb(game->file->c_color[1]);
+	floor_c = parse_rgb(game->file->f_color[1]);
 	y = 0;
 	while (y < game->frame->height)
 	{
