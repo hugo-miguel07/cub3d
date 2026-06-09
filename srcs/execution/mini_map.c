@@ -91,7 +91,7 @@ static void	draw_player(t_game *game, t_minimap *mm)
 	map_h = 0;
 	while (game->file->map[map_h])
 		map_h++;
-	py = (int)(((mm->y_offset + (map_h - 1 - game->player.py)) * mm->tile_size)) - (size / 2);
+	py = (int)(((mm->y_offset + (map_h - game->player.py)) * mm->tile_size)) - (size / 2);
 	y = 0;
 	while (y < size)
 	{
