@@ -6,7 +6,7 @@
 /*   By: htavares <htavares@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 15:51:07 by htavares          #+#    #+#             */
-/*   Updated: 2026/06/09 14:56:13 by htavares         ###   ########.fr       */
+/*   Updated: 2026/06/09 14:58:21 by htavares         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -214,7 +214,7 @@ typedef struct s_minimap
 	unsigned int	color;
 }					t_minimap;
 
-int				exec(s_file *file);
+int				exec(t_file *file);
 void			cleanup_game(t_game *game);
 void			find_player(t_game *game);
 int				create_frame(t_game *game);
