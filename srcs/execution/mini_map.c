@@ -23,8 +23,8 @@ static void	set_to_default(t_minimap *mm)
 	mm->color = 0;
 }
 
-static void	coloring_minimap(t_frame *frame, int start_x
-		, int start_y, t_minimap *mm)
+static void	coloring_minimap(t_frame *frame, int start_x, int start_y,
+		t_minimap *mm)
 {
 	int	x;
 	int	y;
@@ -48,9 +48,9 @@ static void	coloring_minimap(t_frame *frame, int start_x
 
 static void	draw_map2d(t_game *game, t_minimap *mm)
 {
-	int				map_y;
-	int				map_x;
-	int				map_h;
+	int	map_y;
+	int	map_x;
+	int	map_h;
 
 	map_y = -1;
 	map_h = 0;
@@ -71,10 +71,9 @@ static void	draw_map2d(t_game *game, t_minimap *mm)
 				mm->color = 0x00333333;
 			else
 				mm->color = 0x00000000;
-			coloring_minimap(game->frame,
-				(map_x + mm->x_offset) * mm->tile_size,
-				((map_h - 1 - map_y) + mm->y_offset) * mm->tile_size,
-				mm);
+			coloring_minimap(game->frame, (map_x + mm->x_offset)
+				* mm->tile_size, ((map_h - 1 - map_y) + mm->y_offset)
+				* mm->tile_size, mm);
 		}
 	}
 }
@@ -93,7 +92,8 @@ static void	draw_player(t_game *game, t_minimap *mm)
 	map_h = 0;
 	while (game->file->map[map_h])
 		map_h++;
-	py = (int)(((mm->y_offset + (map_h - game->player.py)) * mm->tile_size)) - (size / 2);
+	py = (int)(((mm->y_offset + (map_h - game->player.py)) * mm->tile_size))
+		- (size / 2);
 	y = 0;
 	while (y < size)
 	{

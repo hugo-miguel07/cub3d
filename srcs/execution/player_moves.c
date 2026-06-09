@@ -14,9 +14,9 @@
 
 static int	canmove(t_game *game, double nx, double ny)
 {
-	int     mx;
-	int     my;
-	double  p;
+	int		mx;
+	int		my;
+	double	p;
 
 	if (!game || !game->file || !game->file->map)
 		return (0);

@@ -14,8 +14,8 @@
 
 static void	set_playerpos(t_game *game, int x, int y)
 {
-	game->player.px = (double) x + 0.5;
-	game->player.py = (double) y + 0.5;
+	game->player.px = (double)x + 0.5;
+	game->player.py = (double)y + 0.5;
 }
 
 static void	set_playerangle(t_game *game, char look)
@@ -52,8 +52,8 @@ void	find_player(t_game *game)
 		x = 0;
 		while (map[y][x])
 		{
-			if (map[y][x] == 'N' || map[y][x] == 'S'
-				|| map[y][x] == 'E' || map[y][x] == 'W')
+			if (map[y][x] == 'N' || map[y][x] == 'S' || map[y][x] == 'E'
+				|| map[y][x] == 'W')
 			{
 				set_playerpos(game, x, y);
 				set_playerangle(game, map[y][x]);

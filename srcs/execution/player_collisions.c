@@ -21,10 +21,9 @@ int	is_wall(t_game *game, int x, int y)
 	return (game->file->map[y][x] == '1');
 }
 
-int	check_x_padding(t_game *game, int mx, int my,
-		double nx, double p)
+int	check_x_padding(t_game *game, int mx, int my, double nx, double p)
 {
-	int ix;
+	int	ix;
 
 	ix = (int)(nx + p);
 	if (ix != mx)
@@ -41,10 +40,9 @@ int	check_x_padding(t_game *game, int mx, int my,
 	return (1);
 }
 
-int	check_y_padding(t_game *game, int mx, int my,
-		double ny, double p)
+int	check_y_padding(t_game *game, int mx, int my, double ny, double p)
 {
-	int iy;
+	int	iy;
 
 	iy = (int)(ny + p);
 	if (iy != my)
