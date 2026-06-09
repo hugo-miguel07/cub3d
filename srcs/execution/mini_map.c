@@ -6,7 +6,7 @@
 /*   By: htavares <htavares@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/20 10:28:18 by htavares          #+#    #+#             */
-/*   Updated: 2026/05/20 14:40:02 by htavares         ###   ########.fr       */
+/*   Updated: 2026/06/09 14:29:57 by htavares         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,12 @@ static void	draw_map2d(t_game *game, t_minimap *mm)
 {
 	int				map_y;
 	int				map_x;
+	int				map_h;
 
 	map_y = -1;
+	map_h = 0;
+	while (game->file->map[map_h])
+		map_h++;
 	while (game->file->map[++map_y])
 	{
 		map_x = -1;
@@ -67,7 +71,7 @@ static void	draw_map2d(t_game *game, t_minimap *mm)
 				mm->color = 0x00000000;
 			coloring_minimap(game->frame,
 				(map_x + mm->x_offset) * mm->tile_size,
-				(map_y + mm->y_offset) * mm->tile_size,
+				((map_h - 1 - map_y) + mm->y_offset) * mm->tile_size,
 				mm);
 		}
 	}
@@ -80,10 +84,14 @@ static void	draw_player(t_game *game, t_minimap *mm)
 	int	x;
 	int	y;
 	int	size;
+	int	map_h;
 
 	size = 8;
 	px = (int)((mm->x_offset + game->player.px) * mm->tile_size) - (size / 2);
-	py = (int)((mm->y_offset + game->player.py) * mm->tile_size) - (size / 2);
+	map_h = 0;
+	while (game->file->map[map_h])
+		map_h++;
+	py = (int)(((mm->y_offset + (map_h - 1 - game->player.py)) * mm->tile_size)) - (size / 2);
 	y = 0;
 	while (y < size)
 	{

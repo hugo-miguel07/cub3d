@@ -6,13 +6,11 @@
 /*   By: htavares <htavares@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/18 17:16:57 by htavares          #+#    #+#             */
-/*   Updated: 2026/06/08 18:15:18 by htavares         ###   ########.fr       */
+/*   Updated: 2026/06/09 12:49:02 by htavares         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-
 
 static int	canmove(t_game *game, double nx, double ny)
 {
