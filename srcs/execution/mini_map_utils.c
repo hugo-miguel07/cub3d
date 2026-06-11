@@ -1,38 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   mini_map_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: htavares <htavares@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/09 08:53:02 by htavares          #+#    #+#             */
-/*   Updated: 2026/06/10 13:44:42 by htavares         ###   ########.fr       */
+/*   Created: 2026/06/11 16:00:43 by htavares          #+#    #+#             */
+/*   Updated: 2026/06/11 16:17:22 by htavares         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "cub3d.h"
 
-size_t	ft_strlen(const char *s)
+int	get_map_height(char **map)
 {
-	size_t	size;
+	int	h;
 
-	size = 0;
-	if (!s)
-		return (0);
-	while (*s)
-	{
-		s++;
-		size++;
-	}
-	return (size);
+	h = 0;
+	while (map[h])
+		h++;
+	return (h);
 }
-/*
-#include <stdio.h>
-int	main(void)
-{
-	char *c = "Quarenta";
-
-	printf("%d", ft_strlen(c));
-	return (0);
-}
-*/

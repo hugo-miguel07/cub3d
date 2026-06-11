@@ -6,7 +6,7 @@
 /*   By: htavares <htavares@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 15:51:07 by htavares          #+#    #+#             */
-/*   Updated: 2026/06/09 14:58:21 by htavares         ###   ########.fr       */
+/*   Updated: 2026/06/11 16:09:36 by htavares         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -214,34 +214,41 @@ typedef struct s_minimap
 	unsigned int	color;
 }					t_minimap;
 
-int				exec(t_file *file);
-void			cleanup_game(t_game *game);
-void			find_player(t_game *game);
-int				create_frame(t_game *game);
-int				create_zbuffer(t_game *game);
-int				load_textures(t_game *game);
-void			destroy_textures(t_game *game);
-void			game_loop(t_game *game);
-void			draw_scene(t_game *game);
-unsigned int	parse_rgb(char *str);
-void			put_pixel(t_frame *f, int x, int y, unsigned int color);
-void			init_ray(t_game *game, t_rt_state *rt, int x);
-void			cast_dda(t_game *game, t_rt_state *rt);
-void			calc_wall_height(t_game *game, t_rt_state *rt);
-void			draw_minimap(t_game *game);
-int				render(t_game *game);
-int				move_player(t_game *game);
-int				look_player(t_game *game);
-void			init_dda_params(t_game *game, t_rt_state *rt
-					, double *px, double *py);
-void			init_steps(t_rt_state *rt, double px, double py);
-int				is_outside_map(t_game *game, t_rt_state *rt);
-void			draw_map(t_game *game);
-unsigned int	get_texel(t_texture *tex, int x, int y);
-int				is_wall(t_game *game, int x, int y);
-int				check_x_padding(t_game *game, int mx, int my,
-					double nx, double p);
-int				check_y_padding(t_game *game, int mx, int my,
-					double ny, double p);
+typedef struct s_mmplayerpos
+{
+	int	px;
+	int	py;
+}		t_mmplayerpos;
+
+int					exec(t_file *file);
+void				cleanup_game(t_game *game);
+void				find_player(t_game *game);
+int					create_frame(t_game *game);
+int					create_zbuffer(t_game *game);
+int					load_textures(t_game *game);
+void				destroy_textures(t_game *game);
+void				game_loop(t_game *game);
+void				draw_scene(t_game *game);
+unsigned int		parse_rgb(char *str);
+void				put_pixel(t_frame *f, int x, int y, unsigned int color);
+void				init_ray(t_game *game, t_rt_state *rt, int x);
+void				cast_dda(t_game *game, t_rt_state *rt);
+void				calc_wall_height(t_game *game, t_rt_state *rt);
+void				draw_minimap(t_game *game);
+int					render(t_game *game);
+int					move_player(t_game *game);
+int					look_player(t_game *game);
+void				init_dda_params(t_game *game, t_rt_state *rt,
+						double *px, double *py);
+void				init_steps(t_rt_state *rt, double px, double py);
+int					is_outside_map(t_game *game, t_rt_state *rt);
+void				draw_map(t_game *game);
+unsigned int		get_texel(t_texture *tex, int x, int y);
+int					is_wall(t_game *game, int x, int y);
+int					check_x_padding(t_game *game, int mx, int my,
+						double nx, double p);
+int					check_y_padding(t_game *game, int mx, int my,
+						double ny, double p);
+int					get_map_height(char **map);
 
 #endif

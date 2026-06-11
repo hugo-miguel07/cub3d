@@ -16,6 +16,7 @@ SRCS = srcs/main.c \
 		srcs/execution/raycasting_utils.c \
 		srcs/execution/textures.c \
 		srcs/execution/exec.c \
+		srcs/execution/mini_map_utils.c \
 		srcs/execution/mini_map.c \
 		srcs/execution/player_collisions.c \
 		srcs/execution/player_moves.c \

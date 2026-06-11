@@ -6,7 +6,7 @@
 /*   By: htavares <htavares@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/20 10:28:18 by htavares          #+#    #+#             */
-/*   Updated: 2026/06/09 14:54:13 by htavares         ###   ########.fr       */
+/*   Updated: 2026/06/11 16:16:45 by htavares         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,52 +48,47 @@ static void	coloring_minimap(t_frame *frame, int start_x, int start_y,
 
 static void	draw_map2d(t_game *game, t_minimap *mm)
 {
-	int	map_y;
-	int	map_x;
-	int	map_h;
+	int	mapy;
+	int	mapx;
+	int	maph;
 
-	map_y = -1;
-	map_h = 0;
-	while (game->file->map[map_h])
-		map_h++;
-	while (game->file->map[++map_y])
+	mapy = -1;
+	maph = get_map_height(game->file->map);
+	while (game->file->map[++mapy])
 	{
-		map_x = -1;
-		while (game->file->map[map_y][++map_x])
+		mapx = -1;
+		while (game->file->map[mapy][++mapx])
 		{
-			if (game->file->map[map_y][map_x] == '1')
+			if (game->file->map[mapy][mapx] == '1')
 				mm->color = 0x00FFFFFF;
-			else if (game->file->map[map_y][map_x] == '0'
-				|| game->file->map[map_y][map_x] == 'N'
-				|| game->file->map[map_y][map_x] == 'S'
-				|| game->file->map[map_y][map_x] == 'E'
-				|| game->file->map[map_y][map_x] == 'W')
+			else if (game->file->map[mapy][mapx] == '0'
+				|| game->file->map[mapy][mapx] == 'N'
+				|| game->file->map[mapy][mapx] == 'S'
+				|| game->file->map[mapy][mapx] == 'E'
+				|| game->file->map[mapy][mapx] == 'W')
 				mm->color = 0x00333333;
 			else
 				mm->color = 0x00000000;
-			coloring_minimap(game->frame, (map_x + mm->x_offset)
-				* mm->tile_size, ((map_h - 1 - map_y) + mm->y_offset)
-				* mm->tile_size, mm);
+			coloring_minimap(game->frame, (mapx + mm->x_offset) * mm->tile_size,
+				((maph - 1 - mapy) + mm->y_offset) * mm->tile_size, mm);
 		}
 	}
 }
 
 static void	draw_player(t_game *game, t_minimap *mm)
 {
-	int	px;
-	int	py;
-	int	x;
-	int	y;
-	int	size;
-	int	map_h;
+	t_mmplayerpos	ppos;
+	int				x;
+	int				y;
+	int				size;
+	int				map_h;
 
 	size = 8;
-	px = (int)((mm->x_offset + game->player.px) * mm->tile_size) - (size / 2);
-	map_h = 0;
-	while (game->file->map[map_h])
-		map_h++;
-	py = (int)(((mm->y_offset + (map_h - game->player.py)) * mm->tile_size))
-		- (size / 2);
+	ppos.px = (int)((mm->x_offset + game->player.px)
+			* mm->tile_size) - (size / 2);
+	map_h = get_map_height(game->file->map);
+	ppos.py = (int)(((mm->y_offset + (map_h - game->player.py))
+				* mm->tile_size)) - (size / 2);
 	y = 0;
 	while (y < size)
 	{
