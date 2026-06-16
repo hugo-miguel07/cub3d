@@ -6,7 +6,7 @@
 /*   By: htavares <htavares@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/18 17:16:57 by htavares          #+#    #+#             */
-/*   Updated: 2026/06/11 16:18:12 by htavares         ###   ########.fr       */
+/*   Updated: 2026/06/16 11:35:54 by htavares         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,19 @@
 
 static int	canmove(t_game *game, double nx, double ny)
 {
-	int		mx;
-	int		my;
-	double	p;
+	t_mmplayerpos	ppos;
+	double			p;
 
 	if (!game || !game->file || !game->file->map)
 		return (0);
-	mx = (int)nx;
-	my = (int)ny;
-	if (is_wall(game, mx, my))
+	ppos.px = (int)nx;
+	ppos.py = (int)ny;
+	if (is_wall(game, ppos.px, ppos.py))
 		return (0);
 	p = PLAYERCOLLISION;
-	if (!check_x_padding(game, mx, my, nx, p))
+	if (!check_x_padding(game, ppos, nx, p))
 		return (0);
-	if (!check_y_padding(game, mx, my, ny, p))
+	if (!check_y_padding(game, ppos, ny, p))
 		return (0);
 	return (1);
 }

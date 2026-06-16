@@ -6,7 +6,7 @@
 /*   By: htavares <htavares@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/20 10:28:18 by htavares          #+#    #+#             */
-/*   Updated: 2026/06/11 16:16:45 by htavares         ###   ########.fr       */
+/*   Updated: 2026/06/16 11:27:14 by htavares         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ static void	draw_player(t_game *game, t_minimap *mm)
 		x = 0;
 		while (x < size)
 		{
-			put_pixel(game->frame, px + x, py + y, 0x00FF0000);
+			put_pixel(game->frame, ppos.px + x, ppos.py + y, 0x00FF0000);
 			x++;
 		}
 		y++;

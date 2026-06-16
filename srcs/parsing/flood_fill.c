@@ -15,12 +15,12 @@
 int	flood_fill(t_file *file, char **map, int y, int x)
 {
 	if (y < 0 || !map[y] || x < 0 || x >= (int)ft_strlen(map[y]))
-		return (free_arr(map, map_size(map)), exit_check(invalid_walls, file),
+		return (free_arr(map, map_size(map)), exit_check(invalid_map, file),
 			cleanup(file), exit(1), 0);
 	if (map[y][x] == 'V' || map[y][x] == '1')
 		return (1);
 	if (map[y][x] == ' ' || map[y][x] == '\t')
-		return (free_arr(map, map_size(map)), exit_check(invalid_walls, file),
+		return (free_arr(map, map_size(map)), exit_check(invalid_map, file),
 			cleanup(file), exit(1), 0);
 	map[y][x] = 'V';
 	flood_fill(file, map, y + 1, x);

@@ -33,6 +33,8 @@ static void	exit_check2(enum e_exit_code code, t_file *file)
 		fprintf(stderr, "ERROR: Invalid walls\n");
 	else if (code == invalid_spawn)
 		fprintf(stderr, "ERROR: Invalid spawn\n");
+	else if (code == invalid_map)
+		fprintf(stderr, "ERROR: Invalid map\n");
 }
 
 void	exit_check(enum e_exit_code code, t_file *file)
@@ -53,6 +55,8 @@ void	exit_check(enum e_exit_code code, t_file *file)
 		fprintf(stderr, "ERROR: File is empty\n");
 	else if (code == invalid_id)
 		fprintf(stderr, "ERROR: INVALID ID\n");
+	else if (code == invalid_map)
+		fprintf(stderr, "ERROR: INVALID MAP\n");
 	else
 		exit_check2(code, file);
 }

@@ -6,7 +6,7 @@
 /*   By: htavares <htavares@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 15:51:07 by htavares          #+#    #+#             */
-/*   Updated: 2026/06/11 16:09:36 by htavares         ###   ########.fr       */
+/*   Updated: 2026/06/16 11:37:45 by htavares         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ enum				e_exit_code
 	invalid_map_char,
 	invalid_walls,
 	invalid_spawn,
+	invalid_map,
 };
 
 typedef struct s_file
@@ -245,9 +246,9 @@ int					is_outside_map(t_game *game, t_rt_state *rt);
 void				draw_map(t_game *game);
 unsigned int		get_texel(t_texture *tex, int x, int y);
 int					is_wall(t_game *game, int x, int y);
-int					check_x_padding(t_game *game, int mx, int my,
+int					check_x_padding(t_game *game, t_mmplayerpos ppos,
 						double nx, double p);
-int					check_y_padding(t_game *game, int mx, int my,
+int					check_y_padding(t_game *game, t_mmplayerpos ppos,
 						double ny, double p);
 int					get_map_height(char **map);
 
